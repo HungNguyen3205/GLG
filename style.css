@@ -78,6 +78,18 @@ dialog img { width:100%; display:block; aspect-ratio:2 / 1; object-fit:cover; ba
   .intro > p:last-child { font-size:.88rem; }
   dialog { margin:auto 0 0; width:100%; max-width:none; }
 }
+/* Chapter 02 — amber light and the café doorway. */
+.door[data-slug=ca-phe].active img, body[data-page=ca-phe] .detail-cover { view-transition-name:cafe-scene; }
+::view-transition-group(cafe-scene) { animation-duration:620ms; animation-timing-function:var(--ease); }
+body[data-page=ca-phe] { --gold:#d5af7c; --ink:#1c1510; background:var(--ink); }
+.cafe-jump { display:inline-block; margin-top:12px; padding:10px 0; border-bottom:1px solid var(--gold); color:var(--gold); }
+.cafe-story { display:grid; grid-template-columns:1.1fr 1fr; align-items:center; gap:clamp(25px,7vw,100px); max-width:1200px; margin:clamp(46px,9vw,125px) auto; padding:0 22px; }
+.cafe-story figure { margin:0; }
+.cafe-story img { display:block; width:100%; aspect-ratio:5 / 4; object-fit:cover; background:#704b31; }
+.cafe-story figcaption { margin-top:8px; font-size:.72rem; color:var(--muted); }
+.cafe-story p:last-child,.cafe-menu p:last-child { color:var(--muted); line-height:1.7; }
+.cafe-menu { margin:0 auto 50px; max-width:850px; border-block:1px solid var(--rule); text-align:center; padding:36px 22px; }
+@media(max-width:760px) { .cafe-story { grid-template-columns:1fr; } }
 @media(prefers-reduced-motion:reduce) {
   *,*::before,*::after { animation:none!important; transition:none!important; scroll-behavior:auto!important; }
   .door img,.detail-cover { view-transition-name:none!important; }
