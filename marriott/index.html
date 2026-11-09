@@ -9,6 +9,38 @@
 <main id="top">
 <div class="film"><section class="hero" aria-label="Courtyard by Marriott Danang Han River">
 <img class="hero-photo" src="https://cache.marriott.com/is/image/marriotts7prod/cy-dadcy-rooftop-pool-37438:Wide-Hor?fit=constrain&amp;wid=1920" alt="" fetchpriority="high">
+<svg class="cloudscape" viewBox="0 0 1440 900" preserveAspectRatio="xMidYMax slice" aria-hidden="true" focusable="false">
+  <defs>
+    <radialGradient id="cloud-light" cx=".43" cy=".24" r=".76">
+      <stop stop-color="#fffcf1"/>
+      <stop offset=".53" stop-color="#ecece5"/>
+      <stop offset="1" stop-color="#a2b5b6" stop-opacity=".28"/>
+    </radialGradient>
+    <radialGradient id="cloud-mist">
+      <stop stop-color="#f4f1e5" stop-opacity=".87"/>
+      <stop offset="1" stop-color="#d6e2de" stop-opacity="0"/>
+    </radialGradient>
+    <filter id="cloud-edge" x="-.25" y="-.65" width="1.5" height="2.3" color-interpolation-filters="sRGB">
+      <feTurbulence type="fractalNoise" baseFrequency=".009 .016" numOctaves="3" seed="12" result="noise"/>
+      <feDisplacementMap in="SourceGraphic" in2="noise" scale="44" xChannelSelector="R" yChannelSelector="G"/>
+      <feGaussianBlur stdDeviation="9"/>
+    </filter>
+    <g id="cloud-bank">
+      <ellipse cx="350" cy="280" rx="385" ry="112" fill="url(#cloud-mist)"/>
+      <g fill="url(#cloud-light)" filter="url(#cloud-edge)">
+        <ellipse cx="86" cy="228" rx="125" ry="50"/>
+        <ellipse cx="198" cy="192" rx="142" ry="77"/>
+        <ellipse cx="323" cy="140" rx="148" ry="103"/>
+        <ellipse cx="447" cy="178" rx="155" ry="82"/>
+        <ellipse cx="565" cy="222" rx="126" ry="59"/>
+        <ellipse cx="332" cy="235" rx="302" ry="79"/>
+      </g>
+    </g>
+  </defs>
+  <g class="cloud-far"><g transform="translate(790 -166) scale(.95)"><use href="#cloud-bank"/></g></g>
+  <g class="cloud-right"><g transform="translate(790 620) scale(1.04)"><use href="#cloud-bank"/></g></g>
+  <g class="cloud-left"><g transform="translate(-275 628) scale(1.28)"><use href="#cloud-bank"/></g></g>
+</svg>
 <div class="hero-copy"><p class="eyebrow">COURTYARD BY MARRIOTT · ĐÀ NẴNG</p><h1>Một nhịp khác<br><em>bên sông Hàn.</em></h1><p>Từ ánh sáng ban mai bên cửa sổ đến những buổi tối ngắm thành phố lên đèn.</p><a href="#story" class="explore">Bắt đầu khám phá <span>↓</span></a></div>
 <div class="caption"><span>ĐÀ NẴNG, VIỆT NAM</span><span>01 / 06</span></div>
 </section></div>
