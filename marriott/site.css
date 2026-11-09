@@ -4,3 +4,27 @@
 @keyframes opening{from{transform:scale(1.09)}to{transform:scale(1)}}@keyframes enter{from{opacity:.4;transform:translateY(23px)}to{opacity:1;transform:none}}@keyframes frame-in{from{clip-path:inset(0 0 13%);transform:scale(1.05)}to{clip-path:inset(0);transform:none}}
 @media(max-width:650px){header nav{display:none}.hero{min-height:87svh}.hero-copy{padding-inline:6vw}.hero-photo{object-position:60% center}.hero:after{background:linear-gradient(90deg,#0d1813db,#0d181353),linear-gradient(0deg,#0d1813aa,transparent 30%)}.feature,.feature.reverse{grid-template-columns:1fr}.reverse figure{order:0}.chapters{display:grid;grid-template-columns:1fr 1fr}.caption{font-size:.56rem}}
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*,*::before,*::after{animation:none!important;transition:none!important}}
+
+.film { background: #e9e0d0; }
+.information { max-width: 1340px; margin: 0 auto; padding: 0 6vw clamp(70px, 10vw, 135px); }
+.feature { padding-bottom: 42px; }
+.information h3 { font: 400 clamp(1.9rem, 4vw, 3.7rem)/1 Georgia, serif; margin: 16px 0 25px; }
+.information p:not(.eyebrow) { color: var(--muted); line-height: 1.65; }
+.facts { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 220px), 1fr)); border-top: 1px solid #ffffff36; gap: 16px; }
+.facts article { padding: 16px 10px 20px 0; border-bottom: 1px solid #ffffff36; }
+.facts h4 { color: var(--gold); font: 400 1.32rem Georgia, serif; margin: 0; }
+.facts strong { color: var(--gold); font-size: .74rem; }
+.events { padding-top: 56px; }
+.faq { margin-top: 28px; border-top: 1px solid #ffffff36; }
+.faq details { padding: 16px 0; border-bottom: 1px solid #ffffff36; }
+.faq summary { cursor: pointer; }
+.information .line-link { margin-right: 20px; }
+.film-ready .film { height: 155svh; }
+.film-ready .hero { position: sticky; top: 0; min-height: 100svh; clip-path: inset(calc(var(--frame, 0) * 6%) calc(var(--frame, 0) * 8%) calc(var(--frame, 0) * 6%)); }
+.film-ready .hero-copy { translate: 0 calc(var(--frame, 0) * -30px); opacity: calc(1 - var(--frame, 0) * .9); }
+.film-ready .hero-photo { scale: calc(1 + var(--frame, 0) * .15); }
+.feature.in-view img { animation-duration: 1.2s; }
+@media (max-width:650px) {
+  .film-ready .film { height: 133svh; }
+  .film-ready .hero { min-height: 88svh; }
+}
