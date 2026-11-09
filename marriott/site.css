@@ -28,3 +28,38 @@
   .film-ready .film { height: 133svh; }
   .film-ready .hero { min-height: 88svh; }
 }
+
+/* The camera moves through three cloud banks at different apparent depths. */
+.cloudscape {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 0;
+}
+.hero-copy, .caption { z-index: 1; }
+.hero-copy { position: relative; }
+.cloud-far { opacity: .34; }
+.cloud-left { opacity: .76; }
+.cloud-right { opacity: .88; }
+.film-ready .cloud-far {
+  transform: translate(calc(var(--frame, 0) * 130px), calc(var(--frame, 0) * -85px));
+  opacity: calc(.42 - var(--frame, 0) * .32);
+}
+.film-ready .cloud-left {
+  transform: translate(calc(var(--frame, 0) * -370px), calc(var(--frame, 0) * 135px));
+  opacity: calc(.86 - var(--frame, 0) * .45);
+}
+.film-ready .cloud-right {
+  transform: translate(calc(var(--frame, 0) * 435px), calc(var(--frame, 0) * 150px));
+  opacity: calc(.95 - var(--frame, 0) * .48);
+}
+.film-ready .cloudscape use { animation: cloud-drift 13s ease-in-out infinite alternate; }
+.film-ready .cloud-right use { animation-direction: alternate-reverse; }
+@keyframes cloud-drift { from { transform: translate(-14px, 4px); } to { transform: translate(22px, -10px); } }
+@media (max-width:650px) {
+  .cloudscape { width: 144%; left: -22%; }
+  .film-ready .cloud-left { transform: translate(calc(210px - var(--frame, 0) * 370px), calc(var(--frame, 0) * 100px)); }
+  .film-ready .cloud-right { transform: translate(calc(-235px + var(--frame, 0) * 420px), calc(var(--frame, 0) * 105px)); }
+}
