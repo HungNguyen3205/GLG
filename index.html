@@ -1,22 +1,237 @@
 <!doctype html>
 <html lang="vi">
 <head>
-<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="description" content="Khám phá năm không gian GLG: Khách sạn, Cà phê, Mầm non, Yoga và Spa.">
-<title>GLG · Năm không gian, năm trải nghiệm</title>
-<link rel="stylesheet" href="./style.css"><script type="module" src="./glg.js"></script>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Khám phá các không gian GLG: Khách sạn Marriott, Cà phê 3D, Spa, Mầm non và Gym.">
+<title>GLG · The Collection | Bộ sưu tập không gian & trải nghiệm</title>
+<link rel="stylesheet" href="./style.css">
+<script type="module" src="./glg.js"></script>
 </head>
-<body data-page="home"><a class="skip" href="#main">Đến nội dung</a>
-<header class="top"><a class="brand" href="./" aria-label="GLG, trang chủ">GLG<span>THE COLLECTION</span></a><a href="#spaces">Các không gian ↗</a></header>
+<body data-page="home">
+<a class="skip" href="#main">Đến nội dung</a>
+
+<!-- HEADER -->
+<header class="top">
+  <a class="brand" href="./" aria-label="GLG, trang chủ">
+    GLG
+    <span>THE COLLECTION</span>
+  </a>
+  <nav class="top-nav" aria-label="Điều hướng chính">
+    <a href="./marriott/">Khách sạn</a>
+    <a href="./ca-phe/khong-gian-3d.html">Cà phê 3D</a>
+    <button type="button" class="nav-btn" data-open="spa">Spa</button>
+    <button type="button" class="nav-btn" data-open="mam-non">Mầm non</button>
+    <button type="button" class="nav-btn" data-open="gym">Gym</button>
+  </nav>
+</header>
+
 <main id="main">
-<section id="spaces" class="chapter">
-<div class="intro"><p class="eyebrow">✦ &nbsp; BỘ SƯU TẬP GLG</p><h1>Năm không gian,<br><em>năm trải nghiệm.</em></h1><p>Chọn một ô cửa để bắt đầu câu chuyện của riêng bạn.</p></div>
-<div class="doors" aria-label="Năm không gian GLG"></div>
-<div class="controls"><span id="counter">01 / 05</span><div class="steps" aria-label="Chọn ô cửa"></div><span class="hint">KHÁM PHÁ THEO CÁCH CỦA BẠN</span></div>
-<noscript><p>Khám phá <a href="./khach-san/">Khách sạn GLG</a>. Cà phê, Mầm non, Yoga và Spa đang được chuẩn bị.</p></noscript>
-</section>
-<section class="about"><p class="eyebrow">✦ &nbsp; TINH THẦN GLG</p><h2>Những khoảng thời gian<br><em>dành cho bạn.</em></h2><p>Từ một đêm nghỉ yên tĩnh đến một buổi tập, một tách cà phê hay một ngày khám phá. Mỗi không gian GLG có nhịp điệu riêng.</p></section>
+  <!-- HERO / CARDS SECTION -->
+  <section id="spaces" class="collection-section">
+    <div class="intro">
+      <p class="eyebrow">✦ &nbsp; BỘ SƯU TẬP GLG</p>
+      <h1>Năm không gian,<br><em>năm trải nghiệm.</em></h1>
+      <p class="intro-desc">Lựa chọn dịch vụ để bắt đầu hành trình trải nghiệm của riêng bạn.</p>
+
+      <!-- FILTER PILLS -->
+      <div class="quick-filter" aria-label="Bộ lọc chọn nhanh">
+        <a href="./marriott/" class="filter-pill pill-active">
+          <span class="pill-icon">🏨</span>
+          <span>Khách sạn</span>
+          <span class="pill-badge">Marriott</span>
+        </a>
+        <a href="./ca-phe/khong-gian-3d.html" class="filter-pill pill-active">
+          <span class="pill-icon">☕</span>
+          <span>Cà phê</span>
+          <span class="pill-badge badge-accent">3D Space</span>
+        </a>
+        <button type="button" class="filter-pill" data-open="spa">
+          <span class="pill-icon">🌿</span>
+          <span>Spa</span>
+        </button>
+        <button type="button" class="filter-pill" data-open="mam-non">
+          <span class="pill-icon">🧸</span>
+          <span>Mầm non</span>
+        </button>
+        <button type="button" class="filter-pill" data-open="gym">
+          <span class="pill-icon">🏋️</span>
+          <span>Gym</span>
+        </button>
+      </div>
+    </div>
+
+    <!-- CARDS CAROUSEL ("CARD CHẠY QUA") -->
+    <div class="carousel-container">
+      <button class="carousel-arrow prev" id="btnPrev" type="button" aria-label="Card trước">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"></polyline></svg>
+      </button>
+
+      <div class="cards-track" id="cardsTrack" role="region" aria-label="Danh sách không gian GLG">
+        
+        <!-- CARD 1: KHÁCH SẠN (HOTEL · MARRIOTT) -->
+        <article class="space-card" data-index="0" data-slug="khach-san">
+          <a href="./marriott/" class="card-inner">
+            <div class="card-media">
+              <img src="https://cache.marriott.com/is/image/marriotts7prod/cy-dadcy-rooftop-pool-37438:Wide-Hor?fit=constrain&wid=1200" alt="Khách sạn Courtyard by Marriott Danang" loading="eager">
+              <span class="card-badge">HOTEL · MARRIOTT</span>
+              <span class="card-num">01 / 05</span>
+            </div>
+            <div class="card-body">
+              <span class="card-tag">LƯU TRÚ & NGHỈ DƯỠNG</span>
+              <h2 class="card-title">Khách sạn Marriott</h2>
+              <p class="card-desc">Courtyard by Marriott Danang Han River — Khám phá lưu trú 5 sao, ẩm thực M45 Rooftop Bar và trải nghiệm ngắm thành phố bên sông Hàn.</p>
+              <div class="card-cta">
+                <span>Khám phá Marriott</span>
+                <span class="cta-arrow">→</span>
+              </div>
+            </div>
+          </a>
+        </article>
+
+        <!-- CARD 2: CÀ PHÊ (CAFÉ · 3D SPACE) -->
+        <article class="space-card" data-index="1" data-slug="ca-phe">
+          <a href="./ca-phe/khong-gian-3d.html" class="card-inner">
+            <div class="card-media">
+              <img src="https://images.unsplash.com/photo-1501339847302-ac426a4a7cbb?auto=format&fit=crop&w=1200&q=82" alt="Cà phê GLG Không gian 3D" loading="eager">
+              <span class="card-badge badge-3d">3D VIRTUAL SPACE</span>
+              <span class="card-num">02 / 05</span>
+            </div>
+            <div class="card-body">
+              <span class="card-tag">3D INTERACTIVE · CAFÉ</span>
+              <h2 class="card-title">Cà phê GLG</h2>
+              <p class="card-desc">Bước vào quán cà phê ảo với mô hình 3D tương tác 360°, trải nghiệm quầy bar khép kín và thưởng thức menu tasting tinh tế.</p>
+              <div class="card-cta">
+                <span>Vào không gian 3D</span>
+                <span class="cta-arrow">→</span>
+              </div>
+            </div>
+          </a>
+        </article>
+
+        <!-- CARD 3: SPA (SPA & WELLNESS) -->
+        <article class="space-card" data-index="2" data-slug="spa">
+          <button type="button" class="card-inner card-btn" data-open="spa">
+            <div class="card-media">
+              <img src="https://images.unsplash.com/photo-1540555700478-4be289fbecef?auto=format&fit=crop&w=1200&q=82" alt="GLG Spa" loading="lazy">
+              <span class="card-badge badge-pending">SẮP RA MẮT</span>
+              <span class="card-num">03 / 05</span>
+            </div>
+            <div class="card-body">
+              <span class="card-tag">SPA & WELLNESS</span>
+              <h2 class="card-title">GLG Spa</h2>
+              <p class="card-desc">Khoảng lặng tĩnh tâm để cơ thể và tâm trí được chăm sóc, phục hồi năng lượng với các liệu trình thảo dược và xông hơi chuyên sâu.</p>
+              <div class="card-cta">
+                <span>Xem thông tin</span>
+                <span class="cta-arrow">↗</span>
+              </div>
+            </div>
+          </button>
+        </article>
+
+        <!-- CARD 4: MẦM NON (GIÁO DỤC MẦM NON) -->
+        <article class="space-card" data-index="3" data-slug="mam-non">
+          <button type="button" class="card-inner card-btn" data-open="mam-non">
+            <div class="card-media">
+              <img src="https://images.unsplash.com/photo-1503454537195-1dcabb73ffb9?auto=format&fit=crop&w=1200&q=82" alt="Mầm non GLG" loading="lazy">
+              <span class="card-badge badge-pending">SẮP RA MẮT</span>
+              <span class="card-num">04 / 05</span>
+            </div>
+            <div class="card-body">
+              <span class="card-tag">GIÁO DỤC MẦM NON</span>
+              <h2 class="card-title">Mầm non GLG</h2>
+              <p class="card-desc">Không gian dành cho những năm đầu đời, nơi các bé được tự do sáng tạo, khám phá và phát triển toàn diện theo nhịp riêng.</p>
+              <div class="card-cta">
+                <span>Xem thông tin</span>
+                <span class="cta-arrow">↗</span>
+              </div>
+            </div>
+          </button>
+        </article>
+
+        <!-- CARD 5: GYM (GYM & FITNESS) -->
+        <article class="space-card" data-index="4" data-slug="gym">
+          <button type="button" class="card-inner card-btn" data-open="gym">
+            <div class="card-media">
+              <img src="https://images.unsplash.com/photo-1534438327276-14e5300c3a48?auto=format&fit=crop&w=1200&q=82" alt="GLG Fitness & Gym" loading="lazy">
+              <span class="card-badge badge-pending">SẮP RA MẮT</span>
+              <span class="card-num">05 / 05</span>
+            </div>
+            <div class="card-body">
+              <span class="card-tag">FITNESS & HEALTH</span>
+              <h2 class="card-title">GLG Fitness & Gym</h2>
+              <p class="card-desc">Phòng tập thể hình hiện đại, khu máy tập tiêu chuẩn quốc tế, các lớp rèn luyện thể lực và huấn luyện viên tận tâm đồng hành.</p>
+              <div class="card-cta">
+                <span>Xem thông tin</span>
+                <span class="cta-arrow">↗</span>
+              </div>
+            </div>
+          </button>
+        </article>
+
+      </div>
+
+      <button class="carousel-arrow next" id="btnNext" type="button" aria-label="Card tiếp">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg>
+      </button>
+    </div>
+
+    <!-- CAROUSEL CONTROLS & AUTOPLAY INDICATOR -->
+    <div class="carousel-controls">
+      <span class="card-counter" id="cardCounter">01 / 05</span>
+      <div class="carousel-dots" id="carouselDots" aria-label="Chỉ số card">
+        <button type="button" class="dot active" data-index="0" aria-label="Card 1"></button>
+        <button type="button" class="dot" data-index="1" aria-label="Card 2"></button>
+        <button type="button" class="dot" data-index="2" aria-label="Card 3"></button>
+        <button type="button" class="dot" data-index="3" aria-label="Card 4"></button>
+        <button type="button" class="dot" data-index="4" aria-label="Card 5"></button>
+      </div>
+      <div class="autoplay-status">
+        <button type="button" id="toggleAutoplay" class="autoplay-toggle" aria-label="Bật/Tắt tự động chạy">
+          <span class="autoplay-indicator"></span>
+          <span id="autoplayLabel">Đang tự động chạy</span>
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ABOUT SECTION -->
+  <section class="about">
+    <p class="eyebrow">✦ &nbsp; TINH THẦN GLG</p>
+    <h2>Những khoảng thời gian<br><em>dành cho bạn.</em></h2>
+    <p>Từ một đêm nghỉ bên sông Hàn, một góc cà phê 3D, đến các liệu trình chăm sóc cơ thể hay những giờ tập luyện tràn đầy năng lượng. Mỗi không gian GLG mang một nhịp điệu riêng.</p>
+  </section>
 </main>
-<footer><a class="brand" href="./">GLG</a><nav aria-label="Các mô hình GLG"></nav><span>THE COLLECTION</span></footer>
-<dialog id="preview" aria-labelledby="preview-title"><button class="close" type="button" aria-label="Đóng" autofocus>×</button><img alt=""><div class="dialog-copy"><p class="eyebrow">SẮP RA MẮT</p><h2 id="preview-title"></h2><p class="description"></p></div></dialog>
-</body></html>
+
+<!-- FOOTER -->
+<footer>
+  <a class="brand" href="./">GLG<span>THE COLLECTION</span></a>
+  <nav aria-label="Các mô hình GLG">
+    <a href="./marriott/">Khách sạn</a>
+    <a href="./ca-phe/khong-gian-3d.html">Cà phê 3D</a>
+    <button type="button" data-open="spa">Spa</button>
+    <button type="button" data-open="mam-non">Mầm non</button>
+    <button type="button" data-open="gym">Gym</button>
+  </nav>
+  <span>THE COLLECTION · 2026</span>
+</footer>
+
+<!-- MODAL PREVIEW -->
+<dialog id="preview" aria-labelledby="preview-title">
+  <button class="close" type="button" aria-label="Đóng" autofocus>×</button>
+  <div class="dialog-img-wrapper">
+    <img alt="" src="">
+    <span class="dialog-badge">SẮP RA MẮT</span>
+  </div>
+  <div class="dialog-copy">
+    <p class="eyebrow">KHÔNG GIAN TRẢI NGHIỆM GLG</p>
+    <h2 id="preview-title"></h2>
+    <p class="description"></p>
+    <div class="dialog-action">
+      <button type="button" class="btn-close-dialog">Đã hiểu</button>
+    </div>
+  </div>
+</dialog>
+
+</body>
+</html>

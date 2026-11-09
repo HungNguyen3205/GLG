@@ -1,107 +1,204 @@
-const photo = (id, width) => `https://images.unsplash.com/${id}?auto=format&fit=crop&w=${width}&q=82`;
+// GLG THE COLLECTION - CLIENT SCRIPTS
 
-const spaces = [
-  { slug: 'khach-san', name: 'Khách sạn', line: 'Một nơi để chậm lại và nghỉ ngơi.', photo: 'photo-1611892440504-42a792e24d32', tone: '#604236', published: true },
-  { slug: 'ca-phe', name: 'Cà phê', line: 'Một góc quen cho những cuộc gặp.', description: 'Một tách cà phê và một chỗ ngồi để câu chuyện có thêm thời gian.', photo: 'photo-1501339847302-ac426a4a7cbb', tone: '#704b31', published: true },
-  { slug: 'mam-non', name: 'Mầm non', line: 'Mỗi ngày là một khám phá nhỏ.', description: 'Một không gian dành cho những năm đầu đời, nơi các em được chơi và khám phá theo nhịp riêng.', photo: 'photo-1503454537195-1dcabb73ffb9', tone: '#69543c' },
-  { slug: 'yoga', name: 'Yoga', line: 'Dành thời gian để trở về với mình.', description: 'Khám phá thực hành, lớp học và chương trình đào tạo cùng GLG Yoga School.', photo: 'photo-1544367567-0f2fcb009e0b', tone: '#4c523a' },
-  { slug: 'spa', name: 'Spa', line: 'Một khoảng lặng để cơ thể được chăm sóc.', description: 'Một không gian dành cho những phút nghỉ ngơi và chăm sóc cơ thể.', photo: 'photo-1540555700478-4be289fbecef', tone: '#635049' },
-];
+const spaceDetails = {
+  'spa': {
+    title: 'GLG Spa & Wellness',
+    description: 'Không gian tĩnh lặng dành cho những phút nghỉ ngơi và trị liệu phục hồi. Liệu trình thảo dược truyền thống, massage thư giãn, xông hơi và chăm sóc da chuyên sâu giúp tái tạo năng lượng trọn vẹn.',
+    photo: 'https://images.unsplash.com/photo-1540555700478-4be289fbecef?auto=format&fit=crop&w=1200&q=82'
+  },
+  'mam-non': {
+    title: 'Mầm non GLG (GLG Kindergarten)',
+    description: 'Không gian giáo dục mầm non chất lượng cao, nơi các em được tự do khám phá thế giới xung quanh, phát triển kỹ năng xã hội, tư duy ngôn ngữ và nuôi dưỡng sự sáng tạo theo nhịp tự nhiên của từng lứa tuổi.',
+    photo: 'https://images.unsplash.com/photo-1503454537195-1dcabb73ffb9?auto=format&fit=crop&w=1200&q=82'
+  },
+  'gym': {
+    title: 'GLG Fitness & Gym',
+    description: 'Phòng tập thể hình chuẩn quốc tế với hệ thống máy móc tập luyện tiên tiến, khu tạ tự do, các lớp rèn luyện thể lực và đội ngũ huấn luyện viên chuyên nghiệp đồng hành mỗi ngày.',
+    photo: 'https://images.unsplash.com/photo-1534438327276-14e5300c3a48?auto=format&fit=crop&w=1200&q=82'
+  }
+};
 
-const home = document.body.dataset.page === 'home';
-const base = home ? './' : '../';
-const dialog = document.querySelector('#preview');
-const reduced = matchMedia('(prefers-reduced-motion: reduce)');
-const number = (index) => String(index + 1).padStart(2, '0');
+document.addEventListener('DOMContentLoaded', () => {
+  // 1. MODAL PREVIEW DIALOG
+  const dialog = document.querySelector('#preview');
+  if (dialog) {
+    const dialogImg = dialog.querySelector('img');
+    const dialogTitle = dialog.querySelector('#preview-title');
+    const dialogDesc = dialog.querySelector('.description');
+    const closeBtn = dialog.querySelector('.close');
+    const actionCloseBtn = dialog.querySelector('.btn-close-dialog');
 
-function destination(space) {
-  return space.published ? `href="${base}${space.slug}/"` : `type="button" data-open="${space.slug}"`;
-}
+    let opener = null;
 
-function link(space, content, attributes = '') {
-  const tag = space.published ? 'a' : 'button';
-  return `<${tag} ${destination(space)} ${attributes}>${content}</${tag}>`;
-}
+    document.addEventListener('click', (event) => {
+      const trigger = event.target.closest('[data-open]');
+      if (!trigger) return;
+      const slug = trigger.dataset.open;
+      const data = spaceDetails[slug];
+      if (!data) return;
 
-document.querySelector('footer nav').innerHTML = spaces.map((space) => link(space, space.name)).join('');
-document.querySelectorAll('[data-open]').forEach((element) => {
-  const space = spaces.find((item) => item.slug === element.dataset.open);
-  if (space.published) element.outerHTML = link(space, element.textContent);
-});
-
-let opener;
-document.addEventListener('click', (event) => {
-  const trigger = event.target.closest('[data-open]');
-  if (!trigger) return;
-  const space = spaces.find((item) => item.slug === trigger.dataset.open);
-  opener = trigger;
-  dialog.querySelector('img').src = photo(space.photo, 850);
-  dialog.querySelector('h2').textContent = space.name;
-  dialog.querySelector('.description').textContent = space.description;
-  dialog.showModal();
-});
-dialog.querySelector('.close').addEventListener('click', () => dialog.close());
-dialog.addEventListener('click', (event) => {
-  if (event.target === dialog) dialog.close();
-});
-dialog.addEventListener('close', () => opener?.focus({ preventScroll: true }));
-
-if (home) {
-  const strip = document.querySelector('.doors');
-  const steps = document.querySelector('.steps');
-  const mobile = matchMedia('(max-width: 760px)');
-  let active = 0;
-  strip.innerHTML = spaces.map((space, index) => link(space, `
-    <img src="${photo(space.photo, 1000)}" alt="" ${index === 0 ? 'fetchpriority="high"' : ''}>
-    <span class="door-number">${number(index)} / 05</span>
-    <span class="door-copy"><strong>${space.name}</strong><span class="door-line">${space.line}</span>
-    <span class="door-action">${space.published ? 'Khám phá' : 'Sắp ra mắt'} <span aria-hidden="true">↗</span></span></span>`,
-    `class="door" data-slug="${space.slug}" style="--tone:${space.tone}"`)).join('');
-  steps.innerHTML = spaces.map((space, index) => `<button type="button" aria-label="Chọn ${space.name}">${number(index)}</button>`).join('');
-  const doors = [...strip.children];
-
-  function select(index) {
-    active = index;
-    doors.forEach((door, position) => {
-      door.classList.toggle('active', index === position);
-      steps.children[position].setAttribute('aria-pressed', String(index === position));
+      opener = trigger;
+      dialogImg.src = data.photo;
+      dialogImg.alt = data.title;
+      dialogTitle.textContent = data.title;
+      dialogDesc.textContent = data.description;
+      dialog.showModal();
     });
-    document.querySelector('#counter').textContent = `${number(index)} / 05`;
+
+    closeBtn?.addEventListener('click', () => dialog.close());
+    actionCloseBtn?.addEventListener('click', () => dialog.close());
+    dialog.addEventListener('click', (event) => {
+      if (event.target === dialog) dialog.close();
+    });
+    dialog.addEventListener('close', () => opener?.focus({ preventScroll: true }));
   }
 
-  doors.forEach((door, index) => {
-    door.addEventListener('pointerenter', (event) => {
-      if (!mobile.matches && event.pointerType === 'mouse') select(index);
-    });
-    door.addEventListener('focus', () => select(index));
-    door.addEventListener('click', () => select(index));
-    steps.children[index].addEventListener('click', () => {
-      select(index);
-      if (mobile.matches) strip.scrollTo({ left: door.offsetLeft - strip.firstElementChild.offsetLeft, behavior: reduced.matches ? 'instant' : 'smooth' });
-    });
-  });
+  // 2. CARDS CAROUSEL ("CARD CHẠY QUA")
+  const track = document.querySelector('#cardsTrack');
+  const btnPrev = document.querySelector('#btnPrev');
+  const btnNext = document.querySelector('#btnNext');
+  const dots = document.querySelectorAll('#carouselDots .dot');
+  const counter = document.querySelector('#cardCounter');
+  const toggleAutoplayBtn = document.querySelector('#toggleAutoplay');
+  const autoplayIndicator = document.querySelector('.autoplay-indicator');
+  const autoplayLabel = document.querySelector('#autoplayLabel');
 
-  let frame;
-  strip.addEventListener('scroll', () => {
-    if (!mobile.matches) return;
-    cancelAnimationFrame(frame);
-    frame = requestAnimationFrame(() => {
-      const left = strip.getBoundingClientRect().left;
-      const distances = doors.map((door) => Math.abs(door.getBoundingClientRect().left - left));
-      select(distances.indexOf(Math.min(...distances)));
+  if (track) {
+    const cards = [...track.querySelectorAll('.space-card')];
+    const totalCards = cards.length;
+    let currentIndex = 0;
+    let autoplayActive = true;
+    let autoplayTimer = null;
+    let isUserInteracting = false;
+
+    function getCardWidth() {
+      if (!cards[0]) return 360;
+      const cardRect = cards[0].getBoundingClientRect();
+      const style = window.getComputedStyle(track);
+      const gap = parseFloat(style.gap) || 24;
+      return cardRect.width + gap;
+    }
+
+    function updateActiveState(index) {
+      currentIndex = index;
+      if (counter) {
+        counter.textContent = `${String(index + 1).padStart(2, '0')} / ${String(totalCards).padStart(2, '0')}`;
+      }
+      dots.forEach((dot, idx) => {
+        dot.classList.toggle('active', idx === index);
+      });
+    }
+
+    function scrollToIndex(index, behavior = 'smooth') {
+      if (index < 0) index = 0;
+      if (index >= totalCards) index = 0;
+      const card = cards[index];
+      if (card) {
+        const trackLeft = track.getBoundingClientRect().left;
+        const cardLeft = card.getBoundingClientRect().left;
+        const offset = cardLeft - trackLeft + track.scrollLeft;
+        // Center the card slightly or align to start
+        const centerPadding = Math.max(0, (track.clientWidth - card.offsetWidth) / 2);
+        track.scrollTo({
+          left: Math.max(0, offset - centerPadding),
+          behavior: behavior
+        });
+      }
+      updateActiveState(index);
+    }
+
+    // Next / Prev button actions
+    btnNext?.addEventListener('click', () => {
+      pauseAutoplayTemp();
+      const nextIndex = (currentIndex + 1) % totalCards;
+      scrollToIndex(nextIndex);
     });
-  }, { passive: true });
-  addEventListener('pagehide', () => history.replaceState({ active, left: strip.scrollLeft }, ''));
-  const previousSpace = spaces.findIndex((space) => location.hash === `#from-${space.slug}`);
-  select(previousSpace >= 0 ? previousSpace : (history.state?.active ?? 0));
-  if (mobile.matches && previousSpace >= 0) {
-    strip.scrollLeft = doors[previousSpace].offsetLeft - doors[0].offsetLeft;
+
+    btnPrev?.addEventListener('click', () => {
+      pauseAutoplayTemp();
+      const prevIndex = (currentIndex - 1 + totalCards) % totalCards;
+      scrollToIndex(prevIndex);
+    });
+
+    // Dot navigation
+    dots.forEach((dot, index) => {
+      dot.addEventListener('click', () => {
+        pauseAutoplayTemp();
+        scrollToIndex(index);
+      });
+    });
+
+    // Update index on manual scroll/swipe
+    let scrollTimeout;
+    track.addEventListener('scroll', () => {
+      clearTimeout(scrollTimeout);
+      scrollTimeout = setTimeout(() => {
+        const centerPoint = track.getBoundingClientRect().left + track.clientWidth / 2;
+        let closestIndex = 0;
+        let minDistance = Infinity;
+
+        cards.forEach((card, idx) => {
+          const rect = card.getBoundingClientRect();
+          const cardCenter = rect.left + rect.width / 2;
+          const distance = Math.abs(centerPoint - cardCenter);
+          if (distance < minDistance) {
+            minDistance = distance;
+            closestIndex = idx;
+          }
+        });
+
+        updateActiveState(closestIndex);
+      }, 50);
+    }, { passive: true });
+
+    // Autoplay functionality ("Card tự động chạy qua")
+    function startAutoplay() {
+      stopAutoplay();
+      if (!autoplayActive) return;
+      autoplayTimer = setInterval(() => {
+        if (!isUserInteracting && autoplayActive) {
+          const nextIndex = (currentIndex + 1) % totalCards;
+          scrollToIndex(nextIndex);
+        }
+      }, 3400); // 3.4 seconds per slide
+    }
+
+    function stopAutoplay() {
+      if (autoplayTimer) {
+        clearInterval(autoplayTimer);
+        autoplayTimer = null;
+      }
+    }
+
+    function pauseAutoplayTemp() {
+      isUserInteracting = true;
+      clearTimeout(window.__userInteractTimeout);
+      window.__userInteractTimeout = setTimeout(() => {
+        isUserInteracting = false;
+      }, 5000);
+    }
+
+    // Hover & touch handling to pause while viewing
+    track.addEventListener('pointerenter', () => { isUserInteracting = true; });
+    track.addEventListener('pointerleave', () => { isUserInteracting = false; });
+    track.addEventListener('touchstart', () => { isUserInteracting = true; }, { passive: true });
+    track.addEventListener('touchend', () => { pauseAutoplayTemp(); }, { passive: true });
+
+    // Toggle button
+    toggleAutoplayBtn?.addEventListener('click', () => {
+      autoplayActive = !autoplayActive;
+      if (autoplayActive) {
+        autoplayIndicator?.classList.remove('paused');
+        if (autoplayLabel) autoplayLabel.textContent = 'Đang tự động chạy';
+        startAutoplay();
+      } else {
+        autoplayIndicator?.classList.add('paused');
+        if (autoplayLabel) autoplayLabel.textContent = 'Đã tạm dừng';
+        stopAutoplay();
+      }
+    });
+
+    // Start auto glide
+    startAutoplay();
   }
-  if (mobile.matches && previousSpace < 0 && history.state?.left) strip.scrollLeft = history.state.left;
-} else {
-  const space = spaces.find((item) => item.slug === document.body.dataset.page);
-  const cover = document.querySelector('.detail-cover');
-  if (!cover.hasAttribute('src')) cover.src = photo(space.photo, 1600);
-  const gallery = document.querySelector('.gallery img');
-  if (gallery && !gallery.hasAttribute('src')) gallery.src = photo('photo-1631049307264-da0ec9d70304', 1400);
-}
+});
