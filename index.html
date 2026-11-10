@@ -5,6 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="description" content="Khám phá các không gian GLG: Khách sạn Marriott, Cà phê 3D, Spa, Mầm non và Gym.">
 <title>GLG · The Collection | Bộ sưu tập không gian & trải nghiệm</title>
+<link rel="stylesheet" href="./fonts.css">
 <link rel="stylesheet" href="./style.css">
 <script type="module" src="./glg.js"></script>
 </head>
@@ -13,17 +14,18 @@
 
 <!-- HEADER -->
 <header class="top">
-  <a class="brand" href="./" aria-label="GLG, trang chủ">
+  <a class="brand" href="./index.html" aria-label="GLG, trang chủ">
     GLG
     <span>THE COLLECTION</span>
   </a>
   <nav class="top-nav" aria-label="Điều hướng chính">
-    <a href="./marriott/">Khách sạn</a>
+    <a href="./marriott/index.html">Khách sạn</a>
     <a href="./ca-phe/khong-gian-3d.html">Cà phê 3D</a>
     <button type="button" class="nav-btn" data-open="spa">Spa</button>
     <button type="button" class="nav-btn" data-open="mam-non">Mầm non</button>
     <button type="button" class="nav-btn" data-open="gym">Gym</button>
   </nav>
+  <a class="admin-link" href="./admin/index.html">Quản trị</a>
 </header>
 
 <main id="main">
@@ -36,7 +38,7 @@
 
       <!-- FILTER PILLS -->
       <div class="quick-filter" aria-label="Bộ lọc chọn nhanh">
-        <a href="./marriott/" class="filter-pill pill-active">
+        <a href="./marriott/index.html" class="filter-pill pill-active">
           <span class="pill-icon">🏨</span>
           <span>Khách sạn</span>
           <span class="pill-badge">Marriott</span>
@@ -71,7 +73,7 @@
         
         <!-- CARD 1: KHÁCH SẠN (HOTEL · MARRIOTT) -->
         <article class="space-card" data-index="0" data-slug="khach-san">
-          <a href="./marriott/" class="card-inner">
+          <a href="./marriott/index.html" class="card-inner">
             <div class="card-media">
               <img src="https://cache.marriott.com/is/image/marriotts7prod/cy-dadcy-rooftop-pool-37438:Wide-Hor?fit=constrain&wid=1200" alt="Khách sạn Courtyard by Marriott Danang" loading="eager">
               <span class="card-badge">HOTEL · MARRIOTT</span>
@@ -205,15 +207,15 @@
 
 <!-- FOOTER -->
 <footer>
-  <a class="brand" href="./">GLG<span>THE COLLECTION</span></a>
+  <a class="brand" href="./index.html">GLG<span>THE COLLECTION</span></a>
   <nav aria-label="Các mô hình GLG">
-    <a href="./marriott/">Khách sạn</a>
+    <a href="./marriott/index.html">Khách sạn</a>
     <a href="./ca-phe/khong-gian-3d.html">Cà phê 3D</a>
     <button type="button" data-open="spa">Spa</button>
     <button type="button" data-open="mam-non">Mầm non</button>
     <button type="button" data-open="gym">Gym</button>
   </nav>
-  <span>THE COLLECTION · 2026</span>
+  <span>THE COLLECTION · 2026 · <a href="./admin/index.html" style="color:var(--gold)">Quản trị</a></span>
 </footer>
 
 <!-- MODAL PREVIEW -->

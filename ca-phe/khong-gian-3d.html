@@ -8,7 +8,7 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Inter:wght@300;400;500;600;700&family=Oswald:wght@500;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
   <style>
     :root {
       --bg-cream: #E6E0D6;
@@ -33,7 +33,7 @@
       letter-spacing: 0.04em;
     }
     .font-serif-display {
-      font-family: 'Cormorant Garamond', Georgia, serif;
+      font-family: var(--font-serif);
       letter-spacing: -0.015em;
       line-height: 1.05;
     }
@@ -65,17 +65,20 @@
       color: #F4EFE8;
       border-color: #1E1A17;
     }
-  body, button, input, select { font-family: system-ui, "Segoe UI", Arial, sans-serif; }
-    .font-brand, .font-serif-display { font-family: Georgia, "Times New Roman", serif; }
+  body, button, input, select { font-family: var(--font-sans); }
+    .font-brand, .font-serif-display { font-family: var(--font-serif); }
     #canvas-container canvas { touch-action: pan-y; }
   </style>
+  <link rel="stylesheet" href="../fonts.css">
+<link rel="stylesheet" href="../trai-nghiem.css">
+  <script src="../trai-nghiem.js"></script>
 </head>
-<body class="min-h-screen flex flex-col justify-between relative selection:bg-stone-800 selection:text-stone-100">
+<body class="theme-cafe min-h-screen flex flex-col justify-between relative selection:bg-stone-800 selection:text-stone-100">
 
   <!-- TOP NAVIGATION BAR (EXACT VIDEO LAYOUT) -->
   <header class="w-full px-8 md:px-14 pt-7 pb-2 flex items-center justify-between z-30 relative">
     <div class="flex items-center gap-3">
-      <a href="../" class="inline-flex items-center gap-1.5 px-3 py-1.5 text-[11px] font-semibold tracking-wider uppercase border border-stone-800/30 text-stone-900 hover:bg-stone-800/10 transition rounded-full">
+      <a href="../index.html" class="inline-flex items-center gap-1.5 px-3 py-1.5 text-[11px] font-semibold tracking-wider uppercase border border-stone-800/30 text-stone-900 hover:bg-stone-800/10 transition rounded-full">
         ← GLG Collection
       </a>
       <button id="btn-logo" class="font-brand text-xl md:text-[22px] font-semibold text-[#1E1A17] hover:opacity-80 transition tracking-wider">
@@ -206,6 +209,236 @@
       <span><strong id="footer-seat-text" class="text-stone-900">Counter Pickup</strong></span>
     </div>
   </footer>
+
+  <!-- ======================================================================
+       CÁC PHẦN TRẢI NGHIỆM BÊN DƯỚI MÔ HÌNH 3D
+       ====================================================================== -->
+  <button class="xp-cue" type="button" aria-label="Cuộn xuống để khám phá">Quán đã dựng xong · Cuộn tiếp <span>↓</span></button>
+
+  <div class="xp-root" id="kham-pha">
+    <nav class="xp-subnav" aria-label="Các chương của Cà phê GLG">
+      <a href="#cau-chuyen"><b>01</b>Câu chuyện</a>
+      <a href="#hanh-trinh"><b>02</b>Hành trình hạt</a>
+      <a href="#thuc-don"><b>03</b>Thực đơn</a>
+      <a href="#khung-gio"><b>04</b>Một ngày tại quán</a>
+      <a href="#dat-ban"><b>05</b>Đặt bàn</a>
+      <a href="#thanh-vien"><b>06</b>Thành viên</a>
+      <a href="#su-kien"><b>07</b>Sự kiện</a>
+      <a href="#dia-diem"><b>08</b>Ghé quán</a>
+    </nav>
+
+    <!-- 01 · CÂU CHUYỆN -->
+    <section class="xp-sec" id="cau-chuyen">
+      <div class="xp-wrap">
+        <div class="xp-story">
+          <div class="xp-media xp-reveal"><img loading="lazy" src="https://images.unsplash.com/photo-1442512595331-e89e73853f31?auto=format&fit=crop&w=1000&q=80" alt="Barista đang rót cà phê tại quầy"><span class="xp-tag">Ảnh minh họa</span></div>
+          <div class="xp-reveal" style="--d:.12s">
+            <p class="xp-eyebrow">01 · Câu chuyện</p>
+            <h2 class="xp-h2">Một chỗ ngồi,<br><em>một câu chuyện.</em></h2>
+            <p class="xp-lead" style="margin-top:22px">Quầy bar gỗ óc chó chữ U, tủ bánh hai tầng và ánh nắng xiên qua bức tường vữa. Cà phê GLG được thiết kế như một phòng khách mở: đến một mình để chậm lại, đến cùng bạn bè để trò chuyện, hay mang đi một ly cho buổi sáng bận rộn.</p>
+            <blockquote class="xp-quote">“Mỗi ly cà phê là một khoảnh khắc được pha riêng cho bạn.”</blockquote>
+          </div>
+        </div>
+        <div class="xp-stats">
+          <div class="xp-stat xp-reveal"><strong data-count="12"><span>0</span><small>giờ</small></strong><span>Mở cửa mỗi ngày, 07:00 – 19:00</span></div>
+          <div class="xp-stat xp-reveal" style="--d:.08s"><strong data-count="48"><span>0</span><small>chỗ</small></strong><span>Bàn bistro, ghế quầy bar và băng ghế dài</span></div>
+          <div class="xp-stat xp-reveal" style="--d:.16s"><strong data-count="3"><span>0</span><small>vùng</small></strong><span>Nguồn hạt Cầu Đất, Buôn Ma Thuột, Ethiopia</span></div>
+          <div class="xp-stat xp-reveal" style="--d:.24s"><strong data-count="6"><span>0</span><small>món</small></strong><span>Signature từ quầy bar và tủ bánh</span></div>
+        </div>
+        <p class="xp-note">Số liệu minh họa cho bản thiết kế.</p>
+      </div>
+    </section>
+
+    <!-- 02 · HÀNH TRÌNH HẠT -->
+    <section class="xp-sec alt" id="hanh-trinh">
+      <div class="xp-wrap">
+        <div class="xp-head">
+          <div class="xp-reveal"><p class="xp-eyebrow">02 · Từ nông trại đến tách</p><h2 class="xp-h2">Hành trình<br><em>của một hạt cà phê.</em></h2></div>
+          <p class="xp-lead xp-reveal" style="--d:.1s">Chọn từng bước để xem cách hạt cà phê đi từ sườn đồi cao nguyên đến quầy bar. Mỗi bước gắn với một khu trong mô hình 3D phía trên.</p>
+        </div>
+        <div class="xp-steps" id="bean-steps">
+          <button class="xp-step is-active" type="button" data-stage="1"><span class="dot">01</span><h4>Nông trại</h4><p>Arabica Cầu Đất ở độ cao 1.500 m và Robusta Buôn Ma Thuột, hái chín bằng tay.</p><small>Khung quán</small></button>
+          <button class="xp-step" type="button" data-stage="3"><span class="dot">02</span><h4>Rang mộc</h4><p>Rang theo mẻ nhỏ mỗi tuần, giữ hương trái cây và vị ngọt tự nhiên của hạt.</p><small>Máy xay & espresso</small></button>
+          <button class="xp-step" type="button" data-stage="2"><span class="dot">03</span><h4>Pha thủ công</h4><p>Espresso, pour-over và cold brew được barista chỉnh công thức theo từng loại hạt.</p><small>Quầy bar</small></button>
+          <button class="xp-step" type="button" data-stage="5"><span class="dot">04</span><h4>Tại bàn của bạn</h4><p>Phục vụ cùng bánh nướng trong ngày, ở bàn cửa sổ, quầy bar hoặc góc lounge.</p><small>Toàn cảnh quán</small></button>
+        </div>
+        <p class="xp-note">Bấm một bước để mô hình 3D chuyển tới khu tương ứng.</p>
+      </div>
+    </section>
+
+    <!-- 03 · THỰC ĐƠN -->
+    <section class="xp-sec" id="thuc-don">
+      <div class="xp-wrap">
+        <div class="xp-head">
+          <div class="xp-reveal"><p class="xp-eyebrow">03 · Thực đơn</p><h2 class="xp-h2">Từ quầy bar<br><em>&amp; tủ bánh.</em></h2></div>
+          <p class="xp-lead xp-reveal" style="--d:.1s">Thêm món vào giỏ ngay tại đây. Giỏ hàng dùng chung với nút <b>Thử đặt món</b> trên mô hình 3D.</p>
+        </div>
+        <div class="xp-tabs" role="tablist" aria-label="Lọc thực đơn" id="menu-tabs"></div>
+        <div class="xp-grid" id="menu-grid"></div>
+        <div class="xp-cart-bar"><span id="menu-cart-text">Giỏ đang trống.</span><button class="xp-btn solid" type="button" id="menu-open-cart">Xem giỏ &amp; đặt món →</button></div>
+        <p class="xp-note">Giá và ảnh minh họa. Thao tác đặt món là bản mô phỏng.</p>
+      </div>
+    </section>
+
+    <!-- 04 · MỘT NGÀY TẠI QUÁN -->
+    <section class="xp-sec dark" id="khung-gio">
+      <div class="xp-wrap">
+        <div class="xp-head">
+          <div class="xp-reveal"><p class="xp-eyebrow">04 · Một ngày tại quán</p><h2 class="xp-h2">Ba nhịp sáng,<br><em>ba tâm trạng.</em></h2></div>
+          <p class="xp-lead xp-reveal" style="--d:.1s">Không gian đổi theo ánh sáng trong ngày. Chọn một khung giờ để xem quán trong mô hình 3D dưới đúng ánh sáng đó.</p>
+        </div>
+        <div class="xp-moments">
+          <button class="xp-moment xp-reveal" type="button" data-light="daylight"><img loading="lazy" src="https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?auto=format&fit=crop&w=900&q=80" alt=""><span class="time">07:00</span><h4>Buổi sáng</h4><p>Nắng sớm qua cửa sổ, một flat white và croissant vừa ra lò cho ngày mới.</p><span class="go">Xem ánh sáng ban ngày ↑</span></button>
+          <button class="xp-moment xp-reveal" type="button" data-light="golden" style="--d:.1s"><img loading="lazy" src="https://images.unsplash.com/photo-1501339847302-ac426a4a7cbb?auto=format&fit=crop&w=900&q=80" alt=""><span class="time">15:30</span><h4>Giờ vàng</h4><p>Nắng chiều phủ lên quầy gỗ óc chó. Lúc thích hợp cho cold brew tonic và một cuộc hẹn.</p><span class="go">Xem giờ vàng ↑</span></button>
+          <button class="xp-moment xp-reveal" type="button" data-light="evening" style="--d:.2s"><img loading="lazy" src="https://images.unsplash.com/photo-1554118811-1e0d58224f24?auto=format&fit=crop&w=900&q=80" alt=""><span class="time">18:00</span><h4>Buổi tối</h4><p>Đèn vàng ấm trên tủ bánh và quầy bar, nhạc nhỏ, một ly pour-over trước khi về.</p><span class="go">Xem ánh đèn tối ↑</span></button>
+        </div>
+      </div>
+    </section>
+
+    <!-- 05 · ĐẶT BÀN -->
+    <section class="xp-sec" id="dat-ban">
+      <div class="xp-wrap">
+        <div class="xp-head">
+          <div class="xp-reveal"><p class="xp-eyebrow">05 · Đặt bàn</p><h2 class="xp-h2">Giữ cho bạn<br><em>một chỗ ngồi.</em></h2></div>
+          <p class="xp-lead xp-reveal" style="--d:.1s">Chọn ngày, giờ, số khách và vị trí bàn trong quán. Bàn bạn chọn sẽ được ghi nhận trên mô hình 3D.</p>
+        </div>
+        <div class="xp-booking">
+          <form class="xp-form xp-reveal" id="table-form" novalidate>
+            <div class="row">
+              <label class="xp-field"><span>Ngày</span><input class="xp-input" type="date" name="date" required></label>
+              <div class="xp-field"><span>Số khách</span>
+                <div class="xp-stepper"><button type="button" data-step="-1" aria-label="Bớt khách">−</button><output id="guest-out">2 khách</output><button type="button" data-step="1" aria-label="Thêm khách">+</button></div>
+              </div>
+            </div>
+            <fieldset class="xp-field"><legend>Khung giờ</legend><div class="chips" id="slot-chips"></div></fieldset>
+            <fieldset class="xp-field"><legend>Vị trí trong quán</legend><div class="chips" id="seat-chips">
+              <button class="xp-chip" type="button" aria-pressed="true" data-seat="Table 01 (Window Corner)">Bàn 01 · Góc cửa sổ</button>
+              <button class="xp-chip" type="button" aria-pressed="false" data-seat="Table 02 (Center Bistro)">Bàn 02 · Giữa quán</button>
+              <button class="xp-chip" type="button" aria-pressed="false" data-seat="Table 03 (Pastry Lounge)">Bàn 03 · Cạnh tủ bánh</button>
+              <button class="xp-chip" type="button" aria-pressed="false" data-seat="Bar Counter Stools">Ghế quầy bar</button>
+            </div></fieldset>
+            <div class="row">
+              <label class="xp-field"><span>Tên của bạn</span><input class="xp-input" name="name" placeholder="Nguyễn Văn A" autocomplete="off"></label>
+              <label class="xp-field"><span>Số điện thoại</span><input class="xp-input" name="phone" placeholder="09xx xxx xxx" inputmode="tel" autocomplete="off"></label>
+            </div>
+            <label class="xp-field"><span>Ghi chú</span><input class="xp-input" name="note" placeholder="Sinh nhật, cần ổ cắm, ghế trẻ em…" autocomplete="off"></label>
+          </form>
+          <aside class="xp-summary xp-reveal" style="--d:.1s" aria-live="polite">
+            <p class="xp-eyebrow">Tóm tắt đặt bàn</p>
+            <h3 class="xp-h3">Cà phê GLG</h3>
+            <dl>
+              <dt>Ngày</dt><dd id="sum-date">—</dd>
+              <dt>Giờ</dt><dd id="sum-slot">—</dd>
+              <dt>Số khách</dt><dd id="sum-guests">2 khách</dd>
+              <dt>Vị trí</dt><dd id="sum-seat">Bàn 01 · Góc cửa sổ</dd>
+            </dl>
+            <div class="total"><span>Giữ bàn</span><strong>Miễn phí</strong></div>
+            <button class="xp-btn" type="button" id="table-submit">Xác nhận đặt bàn</button>
+            <div class="xp-confirm" id="table-confirm"></div>
+          </aside>
+        </div>
+      </div>
+    </section>
+
+    <!-- 06 · THÀNH VIÊN -->
+    <section class="xp-sec alt" id="thanh-vien">
+      <div class="xp-wrap xp-loyal">
+        <div class="xp-reveal">
+          <p class="xp-eyebrow">06 · Thành viên GLG</p>
+          <h2 class="xp-h2">Ly thứ chín,<br><em>quán mời.</em></h2>
+          <p class="xp-lead" style="margin-top:20px">Mỗi ly là một con dấu. Đủ tám con dấu, ly tiếp theo do quán mời. Thành viên GLG còn được ưu đãi ở các không gian khác trong bộ sưu tập.</p>
+          <div class="xp-tiers">
+            <div class="xp-tier"><i>B</i><div><h4>Bean · Thành viên mới</h4><p>Tích dấu mỗi ly, quà sinh nhật là một món bánh tự chọn.</p></div></div>
+            <div class="xp-tier"><i>R</i><div><h4>Roast · Từ 30 ly</h4><p>Ưu tiên đặt bàn cuối tuần, giảm 10% hạt rang mang về.</p></div></div>
+            <div class="xp-tier"><i>G</i><div><h4>Gold · Từ 80 ly</h4><p>Mời tham dự buổi cupping riêng và ưu đãi tại Khách sạn, Spa GLG.</p></div></div>
+          </div>
+        </div>
+        <div class="xp-stampcard xp-reveal" style="--d:.12s">
+          <header><span>Thẻ tích dấu</span><strong>CÀ PHÊ GLG</strong></header>
+          <div class="xp-stamps" id="stamps"></div>
+          <footer><span id="stamp-text">Đã có 3/8 dấu</span><button type="button" id="stamp-add">+ Thử tích dấu</button></footer>
+        </div>
+      </div>
+    </section>
+
+    <!-- 07 · SỰ KIỆN -->
+    <section class="xp-sec" id="su-kien">
+      <div class="xp-wrap">
+        <div class="xp-head">
+          <div class="xp-reveal"><p class="xp-eyebrow">07 · Workshop &amp; sự kiện</p><h2 class="xp-h2">Ở lại lâu hơn<br><em>một tách cà phê.</em></h2></div>
+          <p class="xp-lead xp-reveal" style="--d:.1s">Những buổi học và gặp gỡ nhỏ, mỗi buổi tối đa 12 khách, diễn ra ngay tại quầy bar trong mô hình phía trên.</p>
+        </div>
+        <div class="xp-grid">
+          <article class="xp-card xp-reveal"><div class="xp-media"><img loading="lazy" src="https://images.unsplash.com/photo-1511920170033-f8396924c348?auto=format&fit=crop&w=800&q=80" alt="Latte art trên tách cà phê"><span class="xp-tag">Thứ Bảy · 14/11</span></div><div class="xp-card-body"><p class="xp-meta">09:00 · 2 giờ · 12 chỗ</p><h3 class="xp-h3">Workshop latte art</h3><p>Đánh sữa, rót trái tim và hình lá cùng barista trưởng. Mang về một bình đánh sữa nhỏ.</p><div class="xp-card-row"><span class="xp-price">350.000 ₫</span><button class="xp-add" type="button" data-event="Workshop latte art">Giữ chỗ</button></div></div></article>
+          <article class="xp-card xp-reveal" style="--d:.08s"><div class="xp-media"><img loading="lazy" src="https://images.unsplash.com/photo-1447933601403-0c6688de566e?auto=format&fit=crop&w=800&q=80" alt="Hạt cà phê rang"><span class="xp-tag">Thứ Bảy · 21/11</span></div><div class="xp-card-body"><p class="xp-meta">15:00 · 90 phút · 10 chỗ</p><h3 class="xp-h3">Cupping hạt Việt</h3><p>Thử nếm 5 mẫu hạt Cầu Đất và Buôn Ma Thuột, học cách nhận ra hương, vị và hậu vị.</p><div class="xp-card-row"><span class="xp-price">200.000 ₫</span><button class="xp-add" type="button" data-event="Cupping hạt Việt">Giữ chỗ</button></div></div></article>
+          <article class="xp-card xp-reveal" style="--d:.16s"><div class="xp-media"><img loading="lazy" src="https://images.unsplash.com/photo-1453614512568-c4024d13c247?auto=format&fit=crop&w=800&q=80" alt="Không gian quán buổi tối"><span class="xp-tag">Thứ Sáu · 27/11</span></div><div class="xp-card-body"><p class="xp-meta">19:30 · Acoustic · Tự do</p><h3 class="xp-h3">Đêm acoustic</h3><p>Guitar mộc và giọng hát nhỏ giữa quầy bar. Kèm một món signature trong thực đơn tối.</p><div class="xp-card-row"><span class="xp-price">Theo món</span><button class="xp-add" type="button" data-event="Đêm acoustic">Giữ chỗ</button></div></div></article>
+        </div>
+      </div>
+    </section>
+
+    <!-- THƯ VIỆN ẢNH -->
+    <section class="xp-sec alt" id="thu-vien" style="padding-top:clamp(56px,7vw,96px)">
+      <div class="xp-wrap">
+        <div class="xp-head center xp-reveal"><p class="xp-eyebrow">Khoảnh khắc tại GLG</p><h2 class="xp-h2">Góc nhỏ <em>đáng nhớ.</em></h2></div>
+        <div class="xp-gallery">
+          <figure class="xp-media xp-reveal" style="margin:0"><img loading="lazy" src="https://images.unsplash.com/photo-1501339847302-ac426a4a7cbb?auto=format&fit=crop&w=1100&q=80" alt="Không gian quán với bàn gỗ"><figcaption>Khu bàn bistro</figcaption></figure>
+          <figure class="xp-media xp-reveal" style="margin:0;--d:.05s"><img loading="lazy" src="https://images.unsplash.com/photo-1509042239860-f550ce710b93?auto=format&fit=crop&w=600&q=80" alt="Tách cà phê"><figcaption>Espresso</figcaption></figure>
+          <figure class="xp-media xp-reveal" style="margin:0;--d:.1s"><img loading="lazy" src="https://images.unsplash.com/photo-1555507036-ab1f4038808a?auto=format&fit=crop&w=600&q=80" alt="Bánh croissant"><figcaption>Tủ bánh</figcaption></figure>
+          <figure class="xp-media xp-reveal" style="margin:0;--d:.15s"><img loading="lazy" src="https://images.unsplash.com/photo-1521017432531-fbd92d768814?auto=format&fit=crop&w=600&q=80" alt="Góc quán"><figcaption>Góc cửa sổ</figcaption></figure>
+          <figure class="xp-media xp-reveal" style="margin:0;--d:.2s"><img loading="lazy" src="https://images.unsplash.com/photo-1461023058943-07fcbe16d735?auto=format&fit=crop&w=600&q=80" alt="Cà phê đá"><figcaption>Cold brew</figcaption></figure>
+          <figure class="xp-media xp-reveal" style="margin:0;--d:.25s"><img loading="lazy" src="https://images.unsplash.com/photo-1442512595331-e89e73853f31?auto=format&fit=crop&w=600&q=80" alt="Barista rót cà phê"><figcaption>Quầy bar</figcaption></figure>
+        </div>
+        <p class="xp-note" style="text-align:center">Ảnh minh họa. Thay bằng ảnh thực tế của GLG trước khi ra mắt.</p>
+      </div>
+    </section>
+
+    <!-- 08 · GHÉ QUÁN -->
+    <section class="xp-sec" id="dia-diem">
+      <div class="xp-wrap xp-info">
+        <div class="xp-reveal">
+          <p class="xp-eyebrow">08 · Ghé quán</p>
+          <h2 class="xp-h2">Hẹn gặp<br><em>ở quầy bar.</em></h2>
+          <div class="xp-faq" style="margin-top:34px">
+            <details open><summary>Quán có chỗ làm việc không?</summary><p>Có. Bàn dài cạnh tường có ổ cắm và Wi-Fi tốc độ cao. Khung 07:00 – 11:00 thường yên tĩnh nhất.</p></details>
+            <details><summary>Có nhận đặt tiệc nhỏ, sự kiện riêng?</summary><p>Quán nhận nhóm đến 20 khách vào buổi tối, có thể đặt thực đơn bánh và đồ uống riêng.</p></details>
+            <details><summary>Có lựa chọn sữa thực vật, ít đường?</summary><p>Có sữa yến mạch, sữa hạnh nhân và tùy chỉnh độ ngọt cho mọi món.</p></details>
+            <details><summary>Có chỗ gửi xe không?</summary><p>Có chỗ gửi xe máy trước quán và bãi ô tô cách khoảng 100 m.</p></details>
+          </div>
+        </div>
+        <div class="xp-place xp-reveal" style="--d:.12s">
+          <span class="xp-open" id="open-badge">Đang mở cửa</span>
+          <dl>
+            <dt>Địa chỉ</dt><dd>Cà phê GLG · Đà Nẵng<br><small style="color:var(--xp-muted)">Địa chỉ minh họa, cập nhật khi khai trương</small></dd>
+            <dt>Giờ mở cửa</dt><dd><div class="xp-hours" id="hours"></div></dd>
+            <dt>Liên hệ</dt><dd>Hotline đặt bàn · cập nhật sau</dd>
+          </dl>
+          <div class="actions">
+            <a class="xp-btn solid" href="#dat-ban">Đặt bàn</a>
+            <button class="xp-btn ghost" type="button" id="back-to-3d">Xem lại quán 3D ↑</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA CUỐI TRANG -->
+    <section class="xp-sec dark xp-cta">
+      <div class="xp-wrap xp-reveal">
+        <p class="xp-eyebrow">GLG · The Collection</p>
+        <h2 class="xp-h2">Sau ly cà phê,<br><em>nghỉ lại một đêm?</em></h2>
+        <p class="xp-lead" style="margin:22px auto 0">Cà phê GLG là một trong năm không gian của bộ sưu tập. Tiếp tục với kỳ nghỉ bên sông Hàn.</p>
+        <div class="actions">
+          <a class="xp-btn solid" href="../marriott/index.html">Khám phá Khách sạn →</a>
+          <a class="xp-btn ghost" href="../index.html">Về các không gian</a>
+        </div>
+      </div>
+    </section>
+
+    <footer class="xp-foot">
+      <a class="brand" href="../index.html">GLG</a>
+      <nav aria-label="Các không gian GLG"><a href="../marriott/index.html">Khách sạn</a><a href="./khong-gian-3d.html">Cà phê</a><a href="../index.html">Spa · Mầm non · Gym</a></nav>
+      <span>Bản demo thiết kế · Nội dung và ảnh minh họa · 2026</span>
+    </footer>
+  </div>
 
   <!-- SLIDE-OVER DRAWER FOR MENU / ORDER / SEAT RESERVATION -->
   <div id="drawer-backdrop" class="fixed inset-0 bg-black/40 backdrop-blur-xs z-40 hidden opacity-0 transition-opacity duration-300"></div>
@@ -1435,6 +1668,9 @@
         return;
       }
 
+      // Dựng xong 5 bước (hoặc đã cuộn khỏi đầu trang) thì trả lại thao tác cuộn cho trang
+      if (window.XP && !XP.wheelDrivesBuild(e, targetStageFloat, currentStageFloat)) return;
+
       e.preventDefault();
       clearBuildTimers();
       const delta = Math.abs(e.deltaY) < 35 
@@ -1848,8 +2084,14 @@
       });
     }
 
+    // Menu trên cùng: cuộn tới phần tương ứng bên dưới; nếu không có thì mở ngăn kéo như cũ
+    const NAV_SECTIONS = { story: '#cau-chuyen', menu: '#thuc-don', locations: '#dia-diem', journal: '#su-kien', shop: '#thanh-vien' };
     document.querySelectorAll('.nav-link').forEach(link => {
-      link.addEventListener('click', () => openDrawer(link.getAttribute('data-nav')));
+      link.addEventListener('click', () => {
+        const target = document.querySelector(NAV_SECTIONS[link.getAttribute('data-nav')] || '#none');
+        if (target) target.scrollIntoView({ behavior: 'smooth' });
+        else openDrawer(link.getAttribute('data-nav'));
+      });
     });
     document.getElementById('btn-order-online').addEventListener('click', () => openDrawer('order'));
     document.getElementById('btn-close-drawer').addEventListener('click', closeDrawer);
@@ -1872,6 +2114,178 @@
       setBuildStage(1);
       animate();
     });
+  </script>
+
+  <!-- ======================================================================
+       SCRIPT CHO CÁC PHẦN BÊN DƯỚI (dùng state, CATALOG, addItemToCart… ở trên)
+       ====================================================================== -->
+  <script>
+    (function () {
+      const $ = (s, r = document) => r.querySelector(s);
+      const $$ = (s, r = document) => [...r.querySelectorAll(s)];
+
+      // Đưa người xem lên mô hình 3D rồi chuyển tới bước dựng tương ứng
+      function showIn3D(stage) {
+        XP.toTop();
+        setTimeout(() => setBuildStage(stage), 350);
+      }
+
+      // ---------- Hành trình hạt: mỗi bước gắn với một bước dựng 3D ----------
+      $$('#bean-steps .xp-step').forEach((step) => {
+        step.addEventListener('click', () => {
+          $$('#bean-steps .xp-step').forEach((s) => s.classList.toggle('is-active', s === step));
+          showIn3D(parseInt(step.dataset.stage, 10));
+        });
+      });
+
+      // ---------- Thực đơn: dựng từ CATALOG để khớp với ngăn kéo đặt món ----------
+      const MENU_INFO = {
+        'flat-white':     { vn: 'Flat white sữa yến mạch', img: 'https://cdn.peraichi.com/userData/b336ad7b-5931-47e3-89b6-e0580f8fb3c5/img/ef4f5ba0-4feb-013e-d219-0a58a9feac02/%E5%90%8D%E7%A8%B1%E6%9C%AA%E8%A8%AD%E5%AE%9A%20%28800%20x%20800%20px%29.png', note: 'Double ristretto, lớp foam mịn, hậu vị hạt phỉ rang.' },
+        'pour-over':      { vn: 'Pour-over Ethiopia', img: 'https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?auto=format&fit=crop&w=800&q=80', note: 'Pha tay bằng phễu lọc, hương hoa nhài và cam bergamot.' },
+        'espresso-tonic': { vn: 'Cold brew tonic yuzu', img: 'https://www.coffeefriend.co.uk/app/uploads/2025/07/Gemini_Generated_Image_vdkoj2vdkoj2vdko-1024x596.jpg', note: 'Cold brew ủ chậm, tonic thảo mộc và vỏ yuzu tươi.' },
+        'croissant':      { vn: 'Croissant bơ', img: 'https://cdn10.bigcommerce.com/s-f70ch/products/626/images/985/IMG_7668__50212.1751388659.1280.1280.jpg?c=2', note: 'Vỏ vàng giòn, ruột nhiều lớp, bơ lên men kiểu Pháp.' },
+        'pain-chocolat':  { vn: 'Pain au chocolat', img: 'https://images.unsplash.com/photo-1530610476181-d83430b64dcd?auto=format&fit=crop&w=800&q=80', note: 'Bột cán lớp cùng hai thanh chocolate đen 70%.' },
+        'cardamom-bun':   { vn: 'Bánh cuộn bạch đậu khấu', img: 'https://images.unsplash.com/photo-1509440159596-0249088772ff?auto=format&fit=crop&w=800&q=80', note: 'Bạch đậu khấu xay đá, bơ nâu và đường hạt.' }
+      };
+      const TAG_VN = { 'Espresso Bar': 'Espresso', 'Slow Bar': 'Pha chậm', 'Signature': 'Signature', 'Bakery Case': 'Tủ bánh' };
+      const grid = $('#menu-grid');
+      const tabs = $('#menu-tabs');
+      const tags = ['Tất cả', ...new Set(CATALOG.map((i) => i.tag))];
+
+      function renderMenu(filter) {
+        grid.innerHTML = CATALOG.filter((i) => filter === 'Tất cả' || i.tag === filter).map((item, idx) => {
+          const info = MENU_INFO[item.id] || { vn: item.name, img: '', note: item.desc };
+          return `<article class="xp-card xp-reveal is-in" style="--d:${idx * 0.05}s">
+            <div class="xp-media"><img loading="lazy" src="${info.img}" alt="${info.vn}"><span class="xp-tag">${TAG_VN[item.tag] || item.tag}</span></div>
+            <div class="xp-card-body"><p class="xp-meta">${item.name}</p><h3 class="xp-h3">${info.vn}</h3><p>${info.note}</p>
+            <div class="xp-card-row"><span class="xp-price">$${item.price.toFixed(2)}</span><button class="xp-add" type="button" data-add="${item.id}">+ Thêm</button></div></div>
+          </article>`;
+        }).join('');
+      }
+      tabs.innerHTML = tags.map((t, i) => `<button class="xp-tab" role="tab" type="button" aria-selected="${i === 0}" data-tag="${t}">${TAG_VN[t] || t}</button>`).join('');
+      tabs.addEventListener('click', (e) => {
+        const tab = e.target.closest('[data-tag]');
+        if (!tab) return;
+        $$('.xp-tab', tabs).forEach((t) => t.setAttribute('aria-selected', t === tab));
+        renderMenu(tab.dataset.tag);
+      });
+      grid.addEventListener('click', (e) => {
+        const btn = e.target.closest('[data-add]');
+        if (!btn) return;
+        addItemToCart(btn.dataset.add);
+        btn.classList.add('is-added');
+        btn.textContent = '✓ Đã thêm';
+        setTimeout(() => { btn.classList.remove('is-added'); btn.textContent = '+ Thêm'; }, 1400);
+        syncCartBar();
+      });
+      $('#menu-open-cart').addEventListener('click', () => openDrawer('order'));
+      renderMenu('Tất cả');
+
+      function syncCartBar() {
+        const qty = state.cart.reduce((a, i) => a + i.qty, 0);
+        const total = state.cart.reduce((a, i) => a + i.qty * i.price, 0);
+        $('#menu-cart-text').innerHTML = qty
+          ? `Giỏ có <strong>${qty} món</strong> · Tạm tính <strong>$${total.toFixed(2)}</strong>`
+          : 'Giỏ đang trống.';
+      }
+
+      // ---------- Một ngày tại quán: đổi ánh sáng của mô hình 3D ----------
+      $$('.xp-moment').forEach((card) => {
+        card.addEventListener('click', () => {
+          const btn = $('#btn-lighting');
+          for (let i = 0; i < 3 && state.lighting !== card.dataset.light; i++) btn.click();
+          $$('.xp-moment').forEach((c) => c.classList.toggle('is-picked', c === card));
+          showIn3D(5);
+        });
+      });
+
+      // ---------- Đặt bàn ----------
+      const form = $('#table-form');
+      const SLOTS = ['07:30', '09:00', '10:30', '13:00', '15:30', '17:00', '18:00'];
+      const SEAT_VN = {};
+      let guests = 2;
+      let slot = '';
+      $('#slot-chips').innerHTML = SLOTS.map((s) => `<button class="xp-chip" type="button" aria-pressed="false" data-slot="${s}">${s}</button>`).join('');
+      $$('#seat-chips [data-seat]').forEach((b) => { SEAT_VN[b.dataset.seat] = b.textContent; });
+
+      const today = new Date();
+      const iso = (d) => new Date(d.getTime() - d.getTimezoneOffset() * 60000).toISOString().slice(0, 10);
+      form.date.min = iso(today);
+      form.date.value = iso(new Date(today.getTime() + 86400000));
+
+      function syncSummary() {
+        const d = form.date.value ? new Date(form.date.value + 'T00:00') : null;
+        $('#sum-date').textContent = d ? d.toLocaleDateString('vi-VN', { weekday: 'long', day: '2-digit', month: '2-digit' }) : '—';
+        $('#sum-slot').textContent = slot || 'Chưa chọn';
+        $('#sum-guests').textContent = `${guests} khách`;
+        $('#sum-seat').textContent = SEAT_VN[state.selectedSeat] || state.selectedSeat;
+      }
+      form.addEventListener('input', syncSummary);
+      $$('[data-step]', form).forEach((b) => b.addEventListener('click', () => {
+        guests = Math.max(1, Math.min(12, guests + parseInt(b.dataset.step, 10)));
+        $('#guest-out').textContent = `${guests} khách`;
+        syncSummary();
+      }));
+      $('#slot-chips').addEventListener('click', (e) => {
+        const c = e.target.closest('[data-slot]');
+        if (!c) return;
+        slot = c.dataset.slot;
+        $$('#slot-chips .xp-chip').forEach((x) => x.setAttribute('aria-pressed', x === c));
+        syncSummary();
+      });
+      $('#seat-chips').addEventListener('click', (e) => {
+        const c = e.target.closest('[data-seat]');
+        if (!c) return;
+        $$('#seat-chips .xp-chip').forEach((x) => x.setAttribute('aria-pressed', x === c));
+        selectSeat(c.dataset.seat); // cập nhật cả mô hình 3D và chân trang 3D
+        syncSummary();
+      });
+      state.selectedSeat = 'Table 01 (Window Corner)';
+      $('#table-submit').addEventListener('click', () => {
+        const box = $('#table-confirm');
+        if (!slot) { showToast('Hãy chọn một khung giờ'); $('#slot-chips').scrollIntoView({ behavior: 'smooth', block: 'center' }); return; }
+        const name = form.name.value.trim() || 'Quý khách';
+        box.innerHTML = `Cảm ơn <strong>${name.replace(/</g, '&lt;')}</strong>! Bàn của bạn đã được giữ lúc <strong>${slot}</strong>, ${$('#sum-date').textContent}.<br>Mã đặt bàn: <b>${XP.code('GLG')}</b><br><small style="opacity:.7">Bản mô phỏng · chưa gửi dữ liệu.</small>`;
+        box.classList.add('show');
+      });
+      syncSummary();
+
+      // ---------- Thẻ tích dấu ----------
+      let stamps = 3;
+      const cup = '<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 9h12v5a5 5 0 0 1-5 5H9a5 5 0 0 1-5-5V9z"/><path d="M16 11h1.5a2.5 2.5 0 0 1 0 5H16"/><path d="M8 3c0 1.5 1 1.5 1 3M12 3c0 1.5 1 1.5 1 3"/></svg>';
+      function renderStamps() {
+        $('#stamps').innerHTML = Array.from({ length: 8 }, (_, i) => `<span class="xp-stamp ${i < stamps ? 'on' : ''}">${i < stamps ? cup : i + 1}</span>`).join('');
+        $('#stamp-text').textContent = stamps >= 8 ? '🎉 Đủ 8 dấu · Ly tiếp theo quán mời!' : `Đã có ${stamps}/8 dấu`;
+        $('#stamp-add').textContent = stamps >= 8 ? 'Bắt đầu thẻ mới' : '+ Thử tích dấu';
+      }
+      $('#stamp-add').addEventListener('click', () => { stamps = stamps >= 8 ? 0 : stamps + 1; renderStamps(); });
+      renderStamps();
+
+      // ---------- Sự kiện ----------
+      $$('[data-event]').forEach((b) => b.addEventListener('click', () => {
+        b.classList.add('is-added');
+        b.textContent = '✓ Đã giữ chỗ';
+        showToast(`Đã giữ chỗ: ${b.dataset.event} (mô phỏng)`);
+      }));
+
+      // ---------- Giờ mở cửa ----------
+      const now = new Date();
+      const mins = now.getHours() * 60 + now.getMinutes();
+      const open = mins >= 420 && mins < 1140;
+      const badge = $('#open-badge');
+      badge.textContent = open ? 'Đang mở cửa · đến 19:00' : 'Đã đóng cửa · mở lại 07:00';
+      if (!open) badge.style.opacity = '.7';
+      const days = ['Chủ nhật', 'Thứ Hai', 'Thứ Ba', 'Thứ Tư', 'Thứ Năm', 'Thứ Sáu', 'Thứ Bảy'];
+      $('#hours').innerHTML = [1, 2, 3, 4, 5, 6, 0].map((d) => `<span class="${d === now.getDay() ? 'now' : ''}">${days[d]}</span><span class="${d === now.getDay() ? 'now' : ''}">07:00 – 19:00</span>`).join('');
+
+      $('#back-to-3d').addEventListener('click', () => showIn3D(5));
+
+      // ---------- Gợi ý cuộn khi dựng xong + đồng bộ giỏ hàng ----------
+      setInterval(() => {
+        XP.setCue?.(currentStageFloat > 4.85);
+        syncCartBar();
+      }, 400);
+    })();
   </script>
 </body>
 </html>
