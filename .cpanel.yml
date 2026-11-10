@@ -6,5 +6,5 @@ deployment:
   tasks:
     - export DEPLOYPATH=$HOME/glg.danava.com.vn/
     - /bin/mkdir -p $DEPLOYPATH
-    - /bin/cp -R index.html style.css fonts.css glg.js trai-nghiem.css trai-nghiem.js $DEPLOYPATH
-    - /bin/cp -R admin ca-phe khach-san marriott $DEPLOYPATH
+    - /bin/cp -R .htaccess index.html style.css fonts.css glg.js trai-nghiem.css trai-nghiem.js $DEPLOYPATH
+    - /bin/cp -R admin cafe khach-san $DEPLOYPATH

@@ -77,7 +77,7 @@ const SPACES = {
   'khach-san': {
     name: 'Khách sạn', full: 'Courtyard Danang Han River', icon: 'hotel', accent: '#2F6D80', soft: '#E3F0F4',
     cover: 'https://cache.marriott.com/is/image/marriotts7prod/cy-dadcy-rooftop-pool-37438:Wide-Hor?fit=constrain&wid=900',
-    site: '../marriott/index.html', desc: 'Đặt phòng, sơ đồ phòng theo tầng, khách lưu trú và dịch vụ đi kèm.',
+    site: '../khach-san/', desc: 'Đặt phòng, sơ đồ phòng theo tầng, khách lưu trú và dịch vụ đi kèm.',
     pickStats: [['82%', 'Công suất'], ['6', 'Chờ duyệt'], ['186 tr', 'Hôm nay']],
     notifs: [['Đặt phòng mới BK-2611', 'Phạm Gia Hân · Executive Corner · 2 đêm', '5 phút trước'], ['Phòng 1407 cần bảo trì', 'Báo cáo từ bộ phận buồng phòng', '32 phút trước'], ['Đánh giá 5★ mới', '“Tầm nhìn sông Hàn tuyệt đẹp”', '1 giờ trước']],
     modules: [
@@ -148,7 +148,7 @@ Nguyễn Hoàng Long|0983 772 115|Việt Nam|1|2200000|Thường`) },
   'ca-phe': {
     name: 'Cà phê', full: 'Cà phê GLG', icon: 'cup', accent: '#8A5A2B', soft: '#F3E9DD',
     cover: img('photo-1501339847302-ac426a4a7cbb', 900),
-    site: '../ca-phe/khong-gian-3d.html', desc: 'Đơn hàng tại quầy, thực đơn, đặt bàn, sơ đồ bàn, thành viên và sự kiện.',
+    site: '../cafe/', desc: 'Đơn hàng tại quầy, thực đơn, đặt bàn, sơ đồ bàn, thành viên và sự kiện.',
     pickStats: [['214', 'Đơn hôm nay'], ['5', 'Đang pha'], ['12,8 tr', 'Doanh thu']],
     notifs: [['Đơn mới #A-1286', 'Bàn 03 · 2 flat white, 1 croissant', 'Vừa xong'], ['Đặt bàn mới lúc 15:30', 'Nhóm 4 khách · Bàn 02', '18 phút trước'], ['Workshop latte art còn 2 chỗ', 'Thứ Bảy 14/11 · 09:00', '2 giờ trước']],
     modules: [
@@ -233,7 +233,7 @@ Brunch cuối tuần|CN 01/11 · 09:00|24/24|0|Đã kết thúc`) },
   spa: {
     name: 'Spa', full: 'GLG Spa & Wellness', icon: 'spa', accent: '#4F7A5C', soft: '#E5F0E8', soon: true,
     cover: img('photo-1540555700478-4be289fbecef', 900),
-    site: '../index.html', desc: 'Lịch hẹn, liệu trình, phòng trị liệu và đội ngũ kỹ thuật viên.',
+    site: '../', desc: 'Lịch hẹn, liệu trình, phòng trị liệu và đội ngũ kỹ thuật viên.',
     pickStats: [['18', 'Lịch hẹn'], ['5/10', 'Phòng dùng'], ['4,8★', 'Đánh giá']],
     notifs: [['Lịch hẹn mới 16:00', 'Massage đá nóng 90 phút · 2 khách', '10 phút trước'], ['KTV Hồng Nhung xin nghỉ ca tối', 'Cần sắp xếp người thay', '1 giờ trước']],
     modules: [
@@ -285,7 +285,7 @@ Văn Tài|Massage thể thao|Chiều|4,7★|Nghỉ`) },
   'mam-non': {
     name: 'Mầm non', full: 'Mầm non GLG', icon: 'baby', accent: '#B8692E', soft: '#F7EADF', soon: true,
     cover: img('photo-1503454537195-1dcabb73ffb9', 900),
-    site: '../index.html', desc: 'Học sinh, lớp học, điểm danh hằng ngày và hồ sơ tuyển sinh.',
+    site: '../', desc: 'Học sinh, lớp học, điểm danh hằng ngày và hồ sơ tuyển sinh.',
     pickStats: [['186', 'Học sinh'], ['94%', 'Có mặt'], ['7', 'Hồ sơ mới']],
     notifs: [['Hồ sơ tuyển sinh mới', 'Bé Minh Khang · 3 tuổi', '20 phút trước'], ['Phụ huynh xin phép nghỉ', 'Bé An Nhiên · Lớp Chồi 2', '1 giờ trước']],
     modules: [
@@ -337,7 +337,7 @@ Trương An Khang|4|Trương Mỹ Dung|0976 115 029|01/11/2026|Đã nhập học
   gym: {
     name: 'Gym', full: 'GLG Fitness & Gym', icon: 'dumbbell', accent: '#A8432F', soft: '#F6E3DE', soon: true,
     cover: img('photo-1534438327276-14e5300c3a48', 900),
-    site: '../index.html', desc: 'Hội viên, gói tập, lịch lớp, huấn luyện viên và khu thiết bị.',
+    site: '../', desc: 'Hội viên, gói tập, lịch lớp, huấn luyện viên và khu thiết bị.',
     pickStats: [['642', 'Hội viên'], ['231', 'Check-in'], ['19', 'Sắp hết hạn']],
     notifs: [['19 gói tập sắp hết hạn', 'Trong 7 ngày tới', 'Hôm nay'], ['Máy chạy số 7 báo lỗi', 'Đã chuyển sang bảo trì', '40 phút trước']],
     modules: [
@@ -463,7 +463,7 @@ function renderLogin() {
           <div class="login-err" id="login-err" role="alert"></div>
           <button class="btn primary" type="submit" id="login-btn">Đăng nhập</button>
         </form>
-        <div class="login-foot"><a href="../index.html">← Về website GLG</a><span>Bản demo giao diện</span></div>
+        <div class="login-foot"><a href="../">← Về website GLG</a><span>Bản demo giao diện</span></div>
       </div>
     </section>
   </div>`;
@@ -492,7 +492,7 @@ function renderPicker() {
     <div class="picker-top">
       <div class="brand">GLG<small>THE COLLECTION · QUẢN TRỊ</small></div>
       <div class="picker-actions">
-        <a class="btn ghost" href="../index.html">${icon('ext')} <span>Về website</span></a>
+        <a class="btn ghost" href="../">${icon('ext')} <span>Về website</span></a>
         <button class="btn ghost" id="logout">${icon('out')} <span>Đăng xuất</span></button>
       </div>
     </div>
@@ -580,7 +580,7 @@ function buildShell(spaceId, space) {
       </nav>
       <div class="side-foot">
         <a href="${space.site}" target="_blank" rel="noopener">${icon('ext')} Xem website</a>
-        <a href="../index.html">${icon('hotel')} Về trang chủ GLG</a>
+        <a href="../">${icon('hotel')} Về trang chủ GLG</a>
         <button id="logout">${icon('out')} Đăng xuất</button>
       </div>
     </aside>
