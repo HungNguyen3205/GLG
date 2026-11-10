@@ -10,7 +10,7 @@
 | Trang chủ | `https://glg.danava.com.vn/` |
 | Cà phê | `https://glg.danava.com.vn/cafe/` |
 | Khách sạn | `https://glg.danava.com.vn/khach-san/` |
-| Trang quản trị | `https://glg.danava.com.vn/admin/`, mật khẩu `123456` |
+| Trang quản trị | `https://glg.danava.com.vn/admin/`, mật khẩu `123456`. Trang chi tiết: `/admin/cafe/tongquan`, `/admin/khachsan/datphong`… |
 
 ---
 
@@ -61,6 +61,7 @@ cp -R .htaccess index.html style.css fonts.css glg.js trai-nghiem.css trai-nghie
 | `git pull` báo lỗi vì có thay đổi trên host | `cd ~/repositories/GLG && git reset --hard origin/main && git pull origin main` (bản code trên host chỉ để deploy, không sửa tay) |
 | Trình duyệt báo "Không bảo mật" hoặc lỗi SSL | cPanel → **SSL/TLS Status** → tick `glg.danava.com.vn` → **Run AutoSSL**. Khi `https://` đã vào được, mở `.htaccess` và bỏ dấu `#` ở 2 dòng **Ép HTTPS**, sau đó push và deploy lại |
 | Địa chỉ cũ (`/ca-phe/…`, `/marriott/…`) | Đã tự chuyển sang `/cafe/` và `/khach-san/` nhờ `.htaccess`. Thư mục cũ trên host có thể xoá: `rm -r ~/glg.danava.com.vn/ca-phe ~/glg.danava.com.vn/marriott` |
+| `/admin/cafe/tongquan` báo 404 khi tải lại | Thiếu file `.htaccess` trên host. Chạy lại lệnh copy ở Bước 2 (có `.htaccess`) |
 | Web vẫn hiện bản cũ | Nhấn Ctrl + F5. Nếu vẫn cũ, kiểm tra ngày sửa file: `ls -la ~/glg.danava.com.vn` |
 | Cần quay lại bản cũ | `cd ~/repositories/GLG && git log --oneline -5`, sau đó `git checkout <mã-commit> -- .` rồi chạy lại lệnh `cp -R …`. Xong thì `git checkout main -- .` để trở về bản mới nhất |
 

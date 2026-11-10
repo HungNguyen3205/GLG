@@ -54,6 +54,27 @@ const rows = (keys, text) => text.trim().split('\n').map((line, i) => {
   return o;
 });
 const S = (label, tone) => ({ label, tone });
+
+// ---------------------------------------------------------------- Đường dẫn
+// BASE = thư mục chứa admin (lấy từ <base href> trong index.html), thường là "/admin/"
+const BASE = new URL('./', document.baseURI).pathname;
+// Tên mô hình trên thanh địa chỉ
+const SPACE_SLUG = { 'khach-san': 'khachsan', 'ca-phe': 'cafe', spa: 'spa', 'mam-non': 'mamnon', gym: 'gym' };
+const spaceFromSlug = (slug) => Object.keys(SPACE_SLUG).find((k) => SPACE_SLUG[k] === slug);
+// Tên mục = tiêu đề tiếng Việt bỏ dấu, bỏ khoảng trắng: "Tổng quan" → "tongquan"
+const slugify = (t) => t.normalize('NFD').replace(/[̀-ͯ]/g, '').replace(/đ/g, 'd').replace(/Đ/g, 'D').toLowerCase().replace(/[^a-z0-9]/g, '');
+const SHORT_SLUG = { 'Dịch vụ & tiện ích': 'dichvu', 'Nội dung website': 'noidung' };
+const modSlug = (m) => m.slug || SHORT_SLUG[m.label] || slugify(m.label);
+function pathTo(spaceId, modId, action) {
+  const mod = SPACES[spaceId].modules.find((m) => m.id === modId);
+  return `${BASE}${SPACE_SLUG[spaceId]}/${modSlug(mod)}${action ? '/' + action : ''}`;
+}
+function go(path, replace = false) {
+  if (path !== location.pathname) history[replace ? 'replaceState' : 'pushState'](null, '', path);
+  window.scrollTo(0, 0);
+  route();
+}
+let pendingPath = null; // trang định mở trước khi bị yêu cầu đăng nhập
 const img = (id, w = 600) => `https://images.unsplash.com/${id}?auto=format&fit=crop&w=${w}&q=75`;
 
 // ============================================================================ CẤU HÌNH TỪNG MÔ HÌNH
@@ -474,7 +495,7 @@ function renderLogin() {
       const btn = $('#login-btn');
       btn.disabled = true;
       btn.innerHTML = '<span class="spinner"></span> Đang đăng nhập…';
-      setTimeout(() => { setAuthed(true, $('#remember').checked); location.hash = '#/chon'; }, 450);
+      setTimeout(() => { setAuthed(true, $('#remember').checked); const to = pendingPath || BASE; pendingPath = null; go(to, true); }, 450);
     } else {
       $('#login-err').textContent = 'Mật khẩu không đúng. Vui lòng thử lại.';
       const box = $('.login-box');
@@ -500,7 +521,7 @@ function renderPicker() {
       <span class="eyebrow">Xin chào, Minh Anh</span>
       <h1>Hôm nay bạn muốn<br><em>quản lý không gian nào?</em></h1>
       <p>Chọn một mô hình để vào trang quản trị riêng. Bạn có thể đổi mô hình bất cứ lúc nào ở thanh bên trái.</p>
-      ${lastSpace() ? `<a class="resume" href="#/${lastSpace()}/dashboard" style="--sp:${SPACES[lastSpace()].accent}">
+      ${lastSpace() ? `<a class="resume" href="${pathTo(lastSpace(), 'dashboard')}" style="--sp:${SPACES[lastSpace()].accent}">
         <span class="space-icon">${icon(SPACES[lastSpace()].icon)}</span>
         <span><small>Tiếp tục làm việc</small><b>${SPACES[lastSpace()].full}</b></span><span class="go">→</span></a>` : ''}
     </div>
@@ -521,10 +542,10 @@ function renderPicker() {
     </div>
   </div>`;
   $('#logout').onclick = logout;
-  $$('[data-space]').forEach((b) => b.onclick = () => { location.hash = `#/${b.dataset.space}/dashboard`; });
+  $$('[data-space]').forEach((b) => b.onclick = () => go(pathTo(b.dataset.space, 'dashboard')));
 }
 
-function logout() { setAuthed(false); location.hash = '#/dang-nhap'; }
+function logout() { setAuthed(false); closeSheet(); go(BASE); }
 
 // ============================================================================ KHUNG QUẢN TRỊ
 const TAB_COUNT = 4; // số mục hiện trên thanh tab dưới (điện thoại)
@@ -532,7 +553,7 @@ const TAB_COUNT = 4; // số mục hiện trên thanh tab dưới (điện tho�
 function renderShell(spaceId, modId, action) {
   const space = SPACES[spaceId];
   const mod = findMod(space, modId);
-  if (!mod) { history.replaceState(null, '', `#/${spaceId}/dashboard`); return renderShell(spaceId, 'dashboard'); }
+  if (!mod) { history.replaceState(null, '', pathTo(spaceId, 'dashboard')); return renderShell(spaceId, 'dashboard'); }
   document.title = `${mod.label} · ${space.full} · GLG Quản trị`;
   document.documentElement.style.setProperty('--accent', space.accent);
   document.documentElement.style.setProperty('--accent-soft', space.soft);
@@ -576,7 +597,7 @@ function buildShell(spaceId, space) {
       </button>
       <div class="side-label">Quản lý</div>
       <nav class="nav">
-        ${space.modules.map((m) => `<a href="#/${spaceId}/${m.id}" data-mod="${m.id}">${icon(m.icon)}<span>${m.label}</span>${m.badge ? '<span class="count" hidden></span>' : ''}</a>`).join('')}
+        ${space.modules.map((m) => `<a href="${pathTo(spaceId, m.id)}" data-mod="${m.id}">${icon(m.icon)}<span>${m.label}</span>${m.badge ? '<span class="count" hidden></span>' : ''}</a>`).join('')}
       </nav>
       <div class="side-foot">
         <a href="${space.site}" target="_blank" rel="noopener">${icon('ext')} Xem website</a>
@@ -599,14 +620,14 @@ function buildShell(spaceId, space) {
       <main class="content" id="content"></main>
     </div>
     <nav class="tabbar" aria-label="Điều hướng nhanh">
-      ${space.modules.slice(0, TAB_COUNT).map((m) => `<a href="#/${spaceId}/${m.id}" data-mod="${m.id}">${icon(m.icon)}<span>${m.label}</span>${m.badge ? '<span class="count" hidden></span>' : ''}</a>`).join('')}
+      ${space.modules.slice(0, TAB_COUNT).map((m) => `<a href="${pathTo(spaceId, m.id)}" data-mod="${m.id}">${icon(m.icon)}<span>${m.label}</span>${m.badge ? '<span class="count" hidden></span>' : ''}</a>`).join('')}
       <button type="button" data-more>${icon('menu')}<span>Khác</span></button>
     </nav>
   </div>`;
 
   const open = () => $('#shell').classList.add('nav-open');
   const close = () => $('#shell').classList.remove('nav-open');
-  $('#switch').onclick = () => { location.hash = '#/chon'; };
+  $('#switch').onclick = () => go(BASE);
   $('#logout').onclick = logout;
   $('#nav-open').onclick = open;
   $('.tabbar [data-more]').onclick = open;
@@ -632,7 +653,7 @@ function viewDashboard({ spaceId, space, mod, el }) {
   const greet = hour < 11 ? 'Chào buổi sáng' : hour < 18 ? 'Chào buổi chiều' : 'Chào buổi tối';
 
   el.innerHTML = head(`${greet}, Minh Anh`, `Tình hình hoạt động của ${esc(space.full)} hôm nay.`,
-    `<a class="btn ghost" href="${space.site}" target="_blank" rel="noopener">${icon('ext')} Xem website</a><a class="btn primary" href="#/${spaceId}/${recentMod.id}/new">${icon('plus')} ${recentMod.addLabel || 'Thêm mới'}</a>`) +
+    `<a class="btn ghost" href="${space.site}" target="_blank" rel="noopener">${icon('ext')} Xem website</a><a class="btn primary" href="${pathTo(spaceId, recentMod.id, 'moi')}">${icon('plus')} ${recentMod.addLabel || 'Thêm mới'}</a>`) +
   `<div class="kpis">${mod.kpis.map((k) => {
     const v = k.count ? countStatus(spaceId, space, ...k.count) : k.value;
     return `<div class="card kpi"><span>${k.label}</span><strong>${v}</strong><small class="${k.dir || ''}">${k.dir === 'up' ? '▲ ' : k.dir === 'down' ? '▼ ' : ''}${k.delta || ''}</small></div>`;
@@ -642,10 +663,10 @@ function viewDashboard({ spaceId, space, mod, el }) {
     <section class="card"><div class="card-head"><div><h3>Việc cần làm</h3><p id="todo-left">${mod.todo.length - d.done.length} việc còn lại</p></div></div>
       <div class="todo">${mod.todo.map(([t, s], i) => `<label><input type="checkbox" data-todo="${i}" ${d.done.includes(i) ? 'checked' : ''}><span>${t}<small>${s}</small></span></label>`).join('')}</div></section>
   </div>
-  <section class="card"><div class="card-head"><div><h3>${recentMod.label} gần đây</h3><p>5 mục mới nhất</p></div><a href="#/${spaceId}/${recentMod.id}">Xem tất cả →</a></div>
+  <section class="card"><div class="card-head"><div><h3>${recentMod.label} gần đây</h3><p>5 mục mới nhất</p></div><a href="${pathTo(spaceId, recentMod.id)}">Xem tất cả →</a></div>
     <div class="table-wrap"><table class="rows"><thead><tr>${cols.map((c) => `<th class="${c.type === 'money' ? 'money' : ''}">${c.label}</th>`).join('')}</tr></thead>
-    <tbody>${recentRows.map((r) => `<tr data-go="#/${spaceId}/${recentMod.id}" tabindex="0">${cols.map((c) => cell(recentMod, c, r, false)).join('')}</tr>`).join('')}</tbody></table></div></section>`;
-  $$('tr[data-go]', el).forEach((tr) => { tr.onclick = () => { location.hash = tr.dataset.go; }; });
+    <tbody>${recentRows.map((r) => `<tr data-go="${pathTo(spaceId, recentMod.id)}" tabindex="0">${cols.map((c) => cell(recentMod, c, r, false)).join('')}</tr>`).join('')}</tbody></table></div></section>`;
+  $$('tr[data-go]', el).forEach((tr) => { tr.onclick = () => go(tr.dataset.go); });
 
   drawBars($('#chart'), mod.chart);
   let rz;
@@ -814,7 +835,7 @@ function viewTable(ctx) {
   });
   // Đi từ nút "Tạo …" ở trang Tổng quan: mở luôn form, rồi bỏ "/new" khỏi địa chỉ
   if (ctx.action === 'new') {
-    history.replaceState(null, '', `#/${spaceId}/${mod.id}`);
+    history.replaceState(null, '', pathTo(spaceId, mod.id));
     $('#add').click();
   }
 }
@@ -957,25 +978,46 @@ function openForm(title, fields, onSubmit) {
   };
 }
 
-// ============================================================================ ĐIỀU HƯỚNG
+// ============================================================================ ĐIỀU HƯỚNG (đường dẫn thật)
+// /admin/                         → đăng nhập, hoặc chọn mô hình nếu đã đăng nhập
+// /admin/<mô-hình>/<mục>[/moi]    → ví dụ /admin/cafe/tongquan, /admin/khachsan/datphong/moi
 function route() {
-  const [, a, b, c] = location.hash.split('/');
+  const rest = location.pathname.startsWith(BASE) ? location.pathname.slice(BASE.length) : '';
+  const [s, m, act] = rest.split('/').filter(Boolean).map(decodeURIComponent);
   if (!authed()) {
     app.dataset.shell = '';
-    if (a !== 'dang-nhap') history.replaceState(null, '', '#/dang-nhap');
+    if (rest) { pendingPath = location.pathname; history.replaceState(null, '', BASE); }
     return renderLogin();
   }
-  if (a && SPACES[a]) return renderShell(a, b || 'dashboard', c);
+  const spaceId = spaceFromSlug(s);
+  if (spaceId) {
+    const mod = SPACES[spaceId].modules.find((x) => modSlug(x) === m);
+    if (!mod) { history.replaceState(null, '', pathTo(spaceId, 'dashboard')); return renderShell(spaceId, 'dashboard'); }
+    return renderShell(spaceId, mod.id, act === 'moi' ? 'new' : undefined);
+  }
   app.dataset.shell = '';
-  if (a !== 'chon') history.replaceState(null, '', '#/chon');
+  if (rest) history.replaceState(null, '', BASE);
   document.documentElement.style.setProperty('--accent', '#A8834C');
   document.documentElement.style.setProperty('--accent-soft', '#F6F0E6');
   renderPicker();
 }
+
+// Bấm link nội bộ trong admin: đổi địa chỉ mà không tải lại trang
+document.addEventListener('click', (e) => {
+  const a = e.target.closest('a[href]');
+  if (!a || a.target || e.defaultPrevented || e.button !== 0 || e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return;
+  const url = new URL(a.href, location.href);
+  if (url.origin !== location.origin || !url.pathname.startsWith(BASE)) return;
+  e.preventDefault();
+  go(url.pathname);
+});
+addEventListener('popstate', () => { window.scrollTo(0, 0); route(); });
+
 load();
-// Đã đăng nhập mà mở thẳng trang admin thì vào luôn mô hình làm việc gần nhất
-if (authed() && (!location.hash || location.hash === '#/' || location.hash === '#/dang-nhap')) {
-  history.replaceState(null, '', lastSpace() ? `#/${lastSpace()}/dashboard` : '#/chon');
+// Tương thích link cũ dạng #/... (vd. #/ca-phe/dashboard, #/chon)
+if (location.hash.startsWith('#/')) {
+  const [, s, m] = location.hash.split('/');
+  const mod = SPACES[s] && findMod(SPACES[s], m || 'dashboard');
+  history.replaceState(null, '', SPACES[s] ? pathTo(s, mod ? mod.id : 'dashboard') : BASE);
 }
-addEventListener('hashchange', () => { window.scrollTo(0, 0); route(); });
 route();
