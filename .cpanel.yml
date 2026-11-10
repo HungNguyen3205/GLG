@@ -1,10 +1,10 @@
 ---
 # cPanel › Git™ Version Control › Manage › Pull or Deploy › "Deploy HEAD Commit"
 # Copies the website files into the domain's document root.
-# DEPLOYPATH must match the Document Root shown in cPanel › Domains for glg.danava.con.vn.
+# DEPLOYPATH must match the Document Root shown in cPanel › Domains for glg.danava.com.vn.
 deployment:
   tasks:
-    - export DEPLOYPATH=$HOME/glg.danava.con.vn/
+    - export DEPLOYPATH=$HOME/glg.danava.com.vn/
     - /bin/mkdir -p $DEPLOYPATH
     - /bin/cp -R index.html style.css fonts.css glg.js trai-nghiem.css trai-nghiem.js $DEPLOYPATH
     - /bin/cp -R admin ca-phe khach-san marriott $DEPLOYPATH
